@@ -7,7 +7,7 @@ function App() {
 
   const myReducer = (state, action) => {
     if(isNaN(action.value)) return 0;
-    return action.value > 100 ? 100 : action.value < 0 ? 0 : action.value;
+    return action.value > 1000 ? 1000 : action.value < 0 ? 0 : action.value;
   };
 
   const [counter, dispatch] = useReducer(myReducer, 0);
