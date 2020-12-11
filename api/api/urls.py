@@ -15,12 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include
-from api.echos import views 
+from django.conf.urls import url, include 
 
 urlpatterns = [
-	url(r'^api/echos$', views.echos_list),
-    url(r'^api/echos/(?P<pk>[0-9]+)$', views.echos_detail),
+    path('admin/', admin.site.urls),
     url(r'^', include('echos.urls')),
 ]
-

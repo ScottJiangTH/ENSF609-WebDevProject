@@ -1,9 +1,10 @@
 from rest_framework import serializers 
-from api.echos.models import Echos
+from echos.models import Echo
  
  
-class EchosSerializer(serializers.ModelSerializer):
+class EchoSerializer(serializers.ModelSerializer):
  
     class Meta:
-        model = Echos
-        fields = ('message')
+        model = Echo
+        fields = ('id',
+                  'message')

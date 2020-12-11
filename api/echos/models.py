@@ -1,5 +1,4 @@
 from django.db import models
 
-# Create your models here.
-class Echos(models.Model):
-    message = models.CharField(max_length=200,blank=False, default='')
+class Echo(models.Model):
+    message = models.CharField(max_length=70, blank=False, default='')
