@@ -6,7 +6,9 @@ Group Member: (Tommy) Peiyun Zhao, (Scott) Tianhan Jiang, Sonia Islam
 This GitHub repo contains 3 projects:
 - Django pre-project exercise, in folder `api`.
 - React pre-project exercise, in folder `fancy-counter`.
-- The actual web development project, in folder `webapp`.  
+- The actual web development project, in folder `webapp`.,
+  - Frontend React project is in subfolder `fe`
+  - Backend Django project is in subfolder `be`
 
 Project management files are stored with the structure:
 - Folder `ProjectManagement`.
