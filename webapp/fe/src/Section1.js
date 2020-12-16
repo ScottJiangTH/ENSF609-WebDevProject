@@ -13,7 +13,7 @@ function Section1() {
         </div>
       </section>
       <section>
-        <div class="field">
+        <div class="field m-6">
           <div class="control">
             <label class="label">Course Number</label>
             <input class="input" type="text" placeholder="e.g. ENSF 409"></input>
@@ -61,9 +61,9 @@ function Section1() {
         </div>
       </section>
       <section>
-        <div class="buttons">
+        <div class="buttons is-centered m-6">
           <button class="button is-link">Confirm</button>
-          <button class="button is-link">Clear</button>
+          <button class="button is-danger">Clear</button>
         </div>
       </section>
     </html>
