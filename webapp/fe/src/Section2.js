@@ -67,7 +67,7 @@ function Section2() {
                                 </select>
                             </div>
                         </div>
-                        <div class="column">
+                        <div class="column mr-4">
                             <button class="button is-link">Delete Outcome</button>
                         </div>
                     </div>
@@ -174,7 +174,7 @@ function Section2() {
                             </div>
                         </div>
                         <div class='column'></div>
-                        <div class="column">
+                        <div class="column ml-6">
                             <button class="button is-link">Delete Row</button>
                         </div>
                     </div>
@@ -495,7 +495,7 @@ function Section2() {
                     <button class='button is-link'>Save Changes</button>
                 </div>
                 <div class='column'>
-                    <button class='button is-link'>Clear</button>
+                    <button class='button is-link'>Clear Content</button>
                 </div>
                 <div class='column'>
                     <button class='button is-link'>Proceed to Next Section</button>
