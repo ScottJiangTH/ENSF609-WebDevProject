@@ -4,7 +4,7 @@ import 'bulma/css/bulma.css';
 function Section1() {
   return (
     <html>
-      <section class="hero is-primary has-bg-img">
+      <section class="hero is-dark has-bg-img">
         <div class="hero-body">
           <img is-bg-img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
           <div class="container has-text-right">
@@ -25,7 +25,7 @@ function Section1() {
           </div>
           <div class="control">
             <label class="label">Course Description</label>
-            <textarea class="textarea is-success" placeholder="A brief Description of the Course"></textarea>
+            <textarea class="textarea" placeholder="A brief Description of the Course"></textarea>
           </div>
           <div class="control has-icons-left">
             <label class="label">Course Hours</label>
