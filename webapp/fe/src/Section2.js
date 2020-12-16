@@ -44,18 +44,20 @@ function Section2() {
                 </div>
                 <div class="field">
                     <label class="label">Adding Learning Outcome</label>
-                    <div class="level">
-                        <div class='level-item'>
+                    <div class="columns">
+                        <div class='column is-three-quarter'>
                             <input class="textarea" placeholder="Pleas Input Outcome Description"></input>
                         </div>
-                        <div class='level-item'>
+                        <div class='column is-one-quarter'>
                             <button class="button is-link is-centered">Add Outcome</button>
                         </div>
                     </div>
-                    <div class="level">
-                        <label class="label mr-6">Deleting Learning Outcome</label>
-                        <p class="level-left ml-6">Learning Outcome</p>
-                        <div class="level-left">
+                    <div class="columns">
+                        <div class='column'>
+                            <label class="label">Deleting Learning Outcome</label>
+                        </div>
+                        <div class='column is-half'>
+                            <p>Learning Outcome</p>
                             <div class="select is-small">
                                 <select class="select">
                                     <option selected>1</option>
@@ -65,7 +67,7 @@ function Section2() {
                                 </select>
                             </div>
                         </div>
-                        <div class="level-item">
+                        <div class="column">
                             <button class="button is-link">Delete Outcome</button>
                         </div>
                     </div>
@@ -106,13 +108,13 @@ function Section2() {
                         </div>
                     </div>
                 </div>
-                <div class="field mt-1">
-                    <div class="control">
-                        <label class="label">Adding New Row</label>
-                    </div>
-                    <div class="level">
-                        <p class="level-item">Learning Outcome</p>
-                        <div class="level-left">
+                <div class="field mt-3">
+                    <div class="columns">
+                        <div class="column">
+                            <label class="label">Adding New Row</label>
+                        </div>
+                        <div class="column">
+                            <p>Learning Outcome</p>
                             <div class="select is-small">
                                 <select class="select">
                                     <option>4</option>
@@ -122,8 +124,8 @@ function Section2() {
                                 </select>
                             </div>
                         </div>
-                        <p class="level-item">Graduate Attribute</p>
-                        <div class="level-item">
+                        <div class="column">
+                            <p>Graduate Attribute</p>
                             <div class="select is-small">
                                 <select class="select">
                                     <option selected>A1. A knowledge base for engineering</option>
@@ -141,8 +143,8 @@ function Section2() {
                                 </select>
                             </div>
                         </div>
-                        <p class="level-item">Instruction Level</p>
-                        <div class="level-item">
+                        <div class="column">
+                            <p>Instruction Level</p>
                             <div class="select is-small">
                                 <select class="select">
                                     <option>A (Applied)</option>
@@ -151,14 +153,17 @@ function Section2() {
                                 </select>
                             </div>
                         </div>
+                        <div class="column">
+                            <button class="button is-link is-centered">Add Row</button>
+                        </div>
                     </div>
-                    <div class="level-item">
-                        <button class="button is-link">Add Row</button>
-                    </div>
-                    <div class="level">
-                        <label class="label mr-6">Deleting Row</label>
-                        <p class="level-left ml-6">Learning Outcome</p>
-                        <div class="level-left">
+                    <div class="columns">
+                        <div class='column'>
+                            <label class="label">Deleting Row</label>
+                        </div>
+                        <div class='column'></div>
+                        <div class='column'>
+                            <p>Learning Outcome</p>
                             <div class="select is-small">
                                 <select class="select">
                                     <option selected>1</option>
@@ -168,7 +173,8 @@ function Section2() {
                                 </select>
                             </div>
                         </div>
-                        <div class="level-item">
+                        <div class='column'></div>
+                        <div class="column">
                             <button class="button is-link">Delete Row</button>
                         </div>
                     </div>
@@ -481,6 +487,20 @@ function Section2() {
                     <div class="column"></div>
                     <div class="column"></div>
                 </div>
+            </section>
+
+            <section class='columns m-6'>
+                <div class='column'></div>
+                <div class='column'>
+                    <button class='button is-link'>Save Changes</button>
+                </div>
+                <div class='column'>
+                    <button class='button is-link'>Clear</button>
+                </div>
+                <div class='column'>
+                    <button class='button is-link'>Proceed to Next Section</button>
+                </div>
+                <div class='column'></div>
             </section>
         </html >
     );
