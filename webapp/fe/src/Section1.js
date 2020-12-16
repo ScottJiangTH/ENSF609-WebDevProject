@@ -4,9 +4,10 @@ import 'bulma/css/bulma.css';
 function Section1() {
   return (
     <html>
-      <section class="hero is-primary">
+      <section class="hero is-primary has-bg-img">
         <div class="hero-body">
-          <div class="container">
+          <img is-bg-img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
+          <div class="container has-text-right">
             <h1 class="title">Course Outline Builder</h1>
             <h2 class="subtitle">1. Calendar Information</h2>
           </div>
