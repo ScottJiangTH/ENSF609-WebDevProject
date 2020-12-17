@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Section1 from './Section1';
-import Section2 from './Section2';
+import CourseInfo from './CourseInfo';
+import LearningOutcome from './LearningOutcome';
 import Section7 from './Section7';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Section1 />
-    <Section2 />
+    <CourseInfo />
+    <LearningOutcome />
     <Section7 />
   </React.StrictMode>,
   document.getElementById('root')

@@ -4,7 +4,7 @@ function Section7() {
         <html>
             <section class="hero is-dark has-bg-img">
                 <div class="hero-body">
-                    <img is-bg-img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
+                    <img is-bg-img alt="logo" src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
                     <div class="container has-text-right">
                         <h1 class="title">Course Outline Builder</h1>
                         <h1 class="subtitle">7. Final Grade Determination</h1>
@@ -313,11 +313,9 @@ function Section7() {
                     </div>
                     <div class="column is-two-third">
                         <div class='columns'>
-                            <div class='column is-two-fifth'>
-                                <input class="input" type="percentage" placeholder="%"></input>
-                            </div>
+                            <div class='column is-two-fifth'></div>
                             <div class='column is-one-fifth'>
-                                {'<= T <'}
+                                {'T <'}
                             </div>
                             <div class='column is-two-fifth'>
                                 <input class="input" type="percentage" placeholder="%"></input>
@@ -336,7 +334,7 @@ function Section7() {
                     <button class='button is-link'>Clear Content</button>
                 </div>
                 <div class='column'>
-                    <button class='button is-link'>Proceed to Next Section</button>
+                    <button class='button is-link'>Generate PDF</button>
                 </div>
                 <div class='column'></div>
             </section>
