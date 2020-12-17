@@ -24,7 +24,7 @@ export default class CourseInfo extends React.Component {
   }
 
   handleSave(event) {
-    if (this.state == initialState){
+    if (this.state == initialState) {
       alert('No changes to be saved');
     } else {
       alert(this.state.courseInfo.courseName + ' saved. Please proceed to next section.');
@@ -60,11 +60,15 @@ export default class CourseInfo extends React.Component {
       <html>
         <section class="hero is-dark has-bg-img">
           <div class="hero-body">
-            <img is-bg-img alt="logo"
-              src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
-            <div class="container has-text-right">
-              <h1 class="title">Course Outline Builder</h1>
-              <h2 class="subtitle">1. Calendar Information</h2>
+            <div class='columns'>
+              <div class='column'>
+                <img is-bg-img alt="logo"
+                  src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
+              </div>
+              <div class='column has-text-right'>
+                <h1 class="title is-1">Course Outline Builder</h1>
+                <h3 class="title is-3">Calendar Information</h3>
+              </div>
             </div>
           </div>
         </section>
@@ -92,8 +96,8 @@ export default class CourseInfo extends React.Component {
           <div class="control">
             <label class="label">Academic Credit</label>
             <div class="select is-small">
-              <select value={this.state.courseInfo.courseCredit} 
-                      onChange={evt => this.updateCredit(evt)}>
+              <select value={this.state.courseInfo.courseCredit}
+                onChange={evt => this.updateCredit(evt)}>
                 {options.map((option) => (
                   <option value={option.value}>{option.label}</option>))}
               </select>
@@ -102,39 +106,39 @@ export default class CourseInfo extends React.Component {
           <div class="control">
             <label class="label">Course Hours</label>
             <div class='columns'>
-            <div class='column'>
-                {this.state.courseInfo.courseCredit + ' unit; H (' + 
-                this.state.courseInfo.lectureHours + '-' + 
-                this.state.courseInfo.labHours + ')'}
-            </div>
+              <div class='column'>
+                {this.state.courseInfo.courseCredit + ' unit; H (' +
+                  this.state.courseInfo.lectureHours + '-' +
+                  this.state.courseInfo.labHours + ')'}
+              </div>
               <div class='column has-text-right'><label class="label-6">Lecture Hours</label></div>
               <div class='column'>
                 <div class="select is-small">
-                <select value={this.state.courseInfo.lectureHours} 
-                        onChange={evt => this.updateLecture(evt)}>
-                {options.map((option) => (
-                  <option value={option.value}>{option.label}</option>))}
-              </select>
+                  <select value={this.state.courseInfo.lectureHours}
+                    onChange={evt => this.updateLecture(evt)}>
+                    {options.map((option) => (
+                      <option value={option.value}>{option.label}</option>))}
+                  </select>
                 </div>
               </div>
               <div class='column has-text-right'><label class="label-6">Lab Hours</label></div>
               <div class='column'>
                 <div class="select is-small">
-                <select value={this.state.courseInfo.labHours} 
-                        onChange={evt => this.updateLab(evt)}>
-                {options.map((option) => (
-                  <option value={option.value}>{option.label}</option>))}
-              </select>
+                  <select value={this.state.courseInfo.labHours}
+                    onChange={evt => this.updateLab(evt)}>
+                    {options.map((option) => (
+                      <option value={option.value}>{option.label}</option>))}
+                  </select>
                 </div>
               </div>
             </div>
           </div>
           <div class="control">
             <label class="label">Calendar Reference</label>
-            <input class="input" type="text" 
-                  placeholder="e.g. http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers.html#38252"
-                  value={this.state.courseInfo.calendarRef}
-                  onChange={evt => this.updateURL(evt)}></input>
+            <input class="input" type="text"
+              placeholder="e.g. http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers.html#38252"
+              value={this.state.courseInfo.calendarRef}
+              onChange={evt => this.updateURL(evt)}></input>
           </div>
         </section>
         <section class='columns m-6'>

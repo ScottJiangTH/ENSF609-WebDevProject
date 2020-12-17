@@ -5,19 +5,24 @@ class FinalGrade extends React.Component {
     state = {
         outcome: [], // include id, description, gaId, ilId
         category: [], // include cat, element1, element2, au
-        section:[], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
-        labExp:[] // type, numOfLab, safetyTaught, safetyExamed
+        section: [], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
+        labExp: [] // type, numOfLab, safetyTaught, safetyExamed
     }
 
-    render(){
+    render() {
         return (
             <html>
                 <section class="hero is-dark has-bg-img">
                     <div class="hero-body">
-                        <img is-bg-img alt="logo" src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
-                        <div class="container has-text-right">
-                            <h1 class="title">Course Outline Builder</h1>
-                            <h1 class="subtitle">7. Final Grade Determination</h1>
+                        <div class='columns'>
+                            <div class='column'>
+                                <img is-bg-img alt="logo"
+                                    src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
+                            </div>
+                            <div class='column has-text-right'>
+                                <h1 class="title is-1">Course Outline Builder</h1>
+                                <h3 class="title is-3">Final Grade</h3>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -98,7 +103,7 @@ class FinalGrade extends React.Component {
                         </div>
                     </div>
                 </section>
-    
+
                 <section class='section m-6'>
                     Notes:
                     <div class='block'>
@@ -111,7 +116,7 @@ class FinalGrade extends React.Component {
                         c) Conversion from a score out of 100 to a letter grade will be done using the conversion chart shown below. This grading scale can only be changed during the term if the grades will not be lowered.
                     </div>
                 </section>
-    
+
                 <section class='section m-6'>
                     <div class="columns">
                         <div class="column is-one-third">
@@ -334,7 +339,7 @@ class FinalGrade extends React.Component {
                         </div>
                     </div>
                 </section>
-    
+
                 <section class='columns m-6'>
                     <div class='column'></div>
                     <div class='column'>

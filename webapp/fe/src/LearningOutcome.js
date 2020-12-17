@@ -28,19 +28,24 @@ class LearningOutcome extends React.Component {
     state = {
         outcome: [], // include id, description, gaId, ilId
         category: [], // include cat, element1, element2, au
-        section:[], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
-        labExp:[] // type, numOfLab, safetyTaught, safetyExamed
+        section: [], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
+        labExp: [] // type, numOfLab, safetyTaught, safetyExamed
     }
-    
+
     render() {
         return (
             <html>
                 <section class="hero is-dark has-bg-img">
                     <div class="hero-body">
-                        <img is-bg-img alt="logo" src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
-                        <div class="container has-text-right">
-                            <h1 class="title">Course Outline Builder</h1>
-                            <h2 class="subtitle">2. Learning Outcomes</h2>
+                        <div class='columns'>
+                            <div class='column'>
+                                <img is-bg-img alt="logo"
+                                    src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
+                            </div>
+                            <div class='column has-text-right'>
+                                <h1 class="title is-1">Course Outline Builder</h1>
+                                <h3 class="title is-3">Learning Outcomes</h3>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -102,7 +107,7 @@ class LearningOutcome extends React.Component {
                         </div>
                     </div>
                 </section>
-    
+
                 <section class="section m-6 has-background-link-light">
                     <div class='container has-text-left'>
                         <div class='columns is-mobile is-left'>
@@ -209,7 +214,7 @@ class LearningOutcome extends React.Component {
                         </div>
                     </div>
                 </section>
-    
+
                 <section class="section m-6 has-background-link-light">
                     <h2 class='title is-3'>Course Content Categories</h2>
                     <div class="columns">
@@ -381,7 +386,7 @@ class LearningOutcome extends React.Component {
                     </div>
                     <body class="has-text-danger">* At least one element must be selected for categories that identify AUs</body>
                 </section>
-    
+
                 <section class="section m-6 has-background-link-light">
                     <h2 class='title is-3'>Course Section Information</h2>
                     <block>Ensure that the number of sections and hours per week are updated. You may leave the "Number of Students Per Supervisor" column for lecture blank.</block>
@@ -464,7 +469,7 @@ class LearningOutcome extends React.Component {
                         </div>
                     </div>
                 </section>
-    
+
                 <section class="section m-6 has-background-link-light">
                     <h2 class='title is-3'>Laboratory Experience</h2>
                     <block>Ignore this table if the course does not have a laboratory section</block>
@@ -517,7 +522,7 @@ class LearningOutcome extends React.Component {
                         <div class="column"></div>
                     </div>
                 </section>
-    
+
                 <section class='columns m-6'>
                     <div class='column'></div>
                     <div class='column'>
