@@ -1,12 +1,56 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 
-class FinalGrade extends React.Component {
-    state = {
-        outcome: [], // include id, description, gaId, ilId
-        category: [], // include cat, element1, element2, au
-        section: [], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
-        labExp: [] // type, numOfLab, safetyTaught, safetyExamed
+const initialState = {
+    components: {
+        outcome: { assignments: '1-7', project: '1-7', midterm: '1-7', final: '1-7' },
+        weight: { assignments: 25, project: 25, midterm: 25, final: 25, totalWeight: 100 }
+    },
+    chart: {
+        min: { ap: 95, a: 90, am: 85, bp: 80, b: 75, bm: 70, cp: 65, c: 60, cm: 56, dp: 53, d: 50, f: 0 },
+        max: { ap: 100, a: 95, am: 90, bp: 85, b: 80, bm: 75, cp: 70, c: 65, cm: 60, dp: 56, d: 53, f: 50 }
+    }
+};
+
+export default class FinalGrade extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = initialState;
+    }
+
+    handleOutcomeChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            ...this.state,
+            components: {
+                ...this.state.components,
+                outcome: {
+                    ...this.state.components.outcome,
+                    [name]: value
+                }
+            }
+        });
+    }
+
+    handleWeightChange(event) {
+        const target = event.target;
+        const name = target.name;
+        let value = parseInt(target.value);
+        if (isNaN(value)) { value = 0 };
+
+        this.setState({
+            ...this.state,
+            components: {
+                ...this.state.components,
+                weight: {
+                    ...this.state.components.weight,
+                    [name]: value
+                }
+            }
+        });
     }
 
     render() {
@@ -27,7 +71,7 @@ class FinalGrade extends React.Component {
                     </div>
                 </section>
                 <section class="section m-6">
-                    <block>The final grade in this course will be based on the following components:</block>
+                    <div class='block'>The final grade in this course will be based on the following components:</div>
                     <div class="columns">
                         <div class="column">
                             <label class="label">Component</label>
@@ -36,7 +80,7 @@ class FinalGrade extends React.Component {
                             <label class="label">Learning Outcome(s) Evaluated</label>
                         </div>
                         <div class="column">
-                            <label class="label">Weight</label>
+                            <label class="label has-text-centered">Weight %</label>
                         </div>
                     </div>
                     <div class="columns">
@@ -44,10 +88,14 @@ class FinalGrade extends React.Component {
                             <label class="label">Assignments</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" placeholder="1-7"></input>
+                            <input class="input" type="text" placeholder="1-7" name='assignments'
+                                value={this.state.components.outcome.assignments}
+                                onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
-                            <input class="input" type="percentage" placeholder="%"></input>
+                            <input class="number" type="percentage" placeholder="%" name='assignments'
+                                value={this.state.components.weight.assignments}
+                                onChange={event => this.handleWeightChange(event)}></input>
                         </div>
                     </div>
                     <div class="columns">
@@ -55,10 +103,14 @@ class FinalGrade extends React.Component {
                             <label class="label">Project</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" placeholder="1-7"></input>
+                            <input class="input" type="text" placeholder="1-7" name='project'
+                                value={this.state.components.outcome.project}
+                                onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
-                            <input class="input" type="percentage" placeholder="%"></input>
+                            <input class="number" type="percentage" placeholder="%" name='project'
+                                value={this.state.components.weight.project}
+                                onChange={event => this.handleWeightChange(event)}></input>
                         </div>
                     </div>
                     <div class="columns">
@@ -66,10 +118,14 @@ class FinalGrade extends React.Component {
                             <label class="label">Midterm Examination</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" placeholder="1-7"></input>
+                            <input class="input" type="text" placeholder="1-7" name='midterm'
+                                value={this.state.components.outcome.midterm}
+                                onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
-                            <input class="input" type="percentage" placeholder="%"></input>
+                            <input class="number" type="percentage" placeholder="%" name='midterm'
+                                value={this.state.components.weight.midterm}
+                                onChange={event => this.handleWeightChange(event)}></input>
                         </div>
                     </div>
                     <div class="columns">
@@ -77,10 +133,14 @@ class FinalGrade extends React.Component {
                             <label class="label">Final Examination</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" placeholder="1-7"></input>
+                            <input class="input" type="text" placeholder="1-7" name='final'
+                                value={this.state.components.outcome.final}
+                                onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
-                            <input class="input" type="percentage" placeholder="%"></input>
+                            <input class="number" type="percentage" placeholder="%" name='final'
+                                value={this.state.components.weight.final}
+                                onChange={event => this.handleWeightChange(event)}></input>
                         </div>
                     </div>
                     <div class='columns'>
@@ -99,7 +159,9 @@ class FinalGrade extends React.Component {
                             <label class="label">Total: </label>
                         </div>
                         <div class="column">
-                            <input class="input" type="percentage" placeholder="%"></input>
+                            <input class="number" type="percentage"
+                                placeholder="%" disabled={true}
+                                value={this.state.components.weight.totalWeight}></input>
                         </div>
                     </div>
                 </section>
@@ -357,5 +419,3 @@ class FinalGrade extends React.Component {
         );
     }
 }
-
-export default FinalGrade;
