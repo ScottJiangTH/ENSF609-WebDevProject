@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import CourseInfo from './CourseInfo';
 import LearningOutcome from './LearningOutcome';
-import Section7 from './Section7';
+import FinalGrade from './FinalGrade';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <CourseInfo />
     <LearningOutcome />
-    <Section7 />
+    <FinalGrade />
   </React.StrictMode>,
   document.getElementById('root')
 );
