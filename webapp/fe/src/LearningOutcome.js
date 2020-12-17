@@ -129,12 +129,12 @@ class LearningOutcome extends React.Component {
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>A2. A knowledge base for engineering</td>
+                                            <td>A2. Problem analysis</td>
                                             <td>A (Applied)</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td>A3. A knowledge base for engineering</td>
+                                            <td>A3. Investigation</td>
                                             <td>D (Developed)</td>
                                         </tr>
                                     </tbody>
