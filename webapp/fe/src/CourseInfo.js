@@ -1,13 +1,26 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 
-class CourseInfo extends React.Component {
-  state = {
-    courseNum: '',
-    courseName: '',
-    courseHours: '',
-    courseCredit: '',
-    CalendarRef: ''
+export default class CourseInfo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      courseInfo: {
+        courseNum: '',
+        courseName: '',
+        courseHours: '',
+        courseCredit: '',
+        CalendarRef: ''
+      }
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    alert(this.state.courseInfo.courseNum + ' saved. Please proceed to next section.');
+  }
+  updateCourseNum(event){
+    this.setState({ courseInfo: { courseNum: event.target.value } });
   }
 
   render() {
@@ -25,7 +38,9 @@ class CourseInfo extends React.Component {
         <section class='section m-6'>
           <div class="control">
             <label class="label">Course Number</label>
-            <input class="input" type="text" placeholder="e.g. ENSF 409"></input>
+            <input class="input" type="text" placeholder="e.g. ENSF 409"
+                  value={this.state.courseInfo.courseNum}
+                  onChange={evt => this.updateCourseNum(evt)}></input>
           </div>
           <div class="control">
             <label class="label">Course Name</label>
@@ -71,7 +86,7 @@ class CourseInfo extends React.Component {
         <section class='columns m-6'>
           <div class='column'></div>
           <div class='column'>
-            <button class='button is-link'>Save Changes</button>
+            <button class='button is-link'  onClick={this.handleClick} >Save Changes</button>
           </div>
           <div class='column'>
             <button class='button is-link'>Clear Content</button>
@@ -85,5 +100,3 @@ class CourseInfo extends React.Component {
     );
   }
 }
-
-export default CourseInfo;
