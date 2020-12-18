@@ -24,7 +24,7 @@ export default class CourseInfo extends React.Component {
   }
 
   handleSave(event) {
-    if (this.state == initialState) {
+    if (this.state === initialState) {
       alert('No changes to be saved');
     } else {
       alert(this.state.courseInfo.courseName + ' saved. Please proceed to next section.');
