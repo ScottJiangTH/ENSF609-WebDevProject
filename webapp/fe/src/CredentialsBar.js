@@ -3,8 +3,8 @@ import './App.css';
 import { Link } from 'react-router-dom';
 function CredentialBar() {
 
-    const linkStyle={
-        colour:'wheat'
+    const linkStyle = {
+        color: 'wheat'
     }
 
     return (
@@ -17,7 +17,7 @@ function CredentialBar() {
                 <Link style={linkStyle} to='/prof'>
                     <li>Professor</li>
                 </Link>
-               
+
             </ul>
         </nav>
 

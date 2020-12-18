@@ -1,19 +1,23 @@
 import React from 'react';
 import './index.css';
-
+import { Link } from 'react-router-dom';
 function ProfPage() {
 
-  return (
-    <section className="landing">
-        <div class='column'></div>
-                    <div class='column' >
-                        <button class='button is-large is-fullwidth is-rounded is-link' >New Form</button>
-                    </div>
-                    <div class='column'>
-                        <button class='button is-large is-fullwidth is-rounded is-link'>Existing Form</button>
-                    </div>
-    </section>
-  );
+    return (
+        <section className="landing">
+            <div class='column'></div>
+            <div class='column' >
+                <Link to="/prof/new/courseinfo">
+                    <button class='button is-large is-fullwidth is-rounded is-link' >New Form</button>
+                </Link>
+            </div>
+            <div class='column'>
+
+                <button class='button is-large is-fullwidth is-rounded is-link'>Existing Form</button>
+
+            </div>
+        </section>
+    );
 }
 
 export default ProfPage;

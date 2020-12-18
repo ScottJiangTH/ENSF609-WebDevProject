@@ -1,6 +1,6 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
-
+import ProfFormBar from './ProfFormBar';
 const initialState = {
   courseInfo: {
     courseNum: '',
@@ -57,6 +57,7 @@ export default class CourseInfo extends React.Component {
   }
   render() {
     return (
+      
       <html>
         <section class="hero is-dark has-bg-img">
           <div class="hero-body">

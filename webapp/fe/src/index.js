@@ -19,9 +19,10 @@ ReactDOM.render(
           <Route path="/" exact component={Welcome}/>
           <Route path="/prof" exact component={ProfPage}/>
           <Route path="/admin" />
-          <Route path="/prof/courseinfo" component = {CourseInfo}/> 
-          <Route path="/prof/learningoutcome" component = {LearningOutcome}/> 
-          <Route path="/prof/finalgrade" component = {FinalGrade}/> 
+          <Route path="/prof/new" component={ProfFormBar}/>
+          <Route path="/prof/new/courseinfo" component = {CourseInfo}/> 
+          <Route path="/prof/new/learningoutcome" component = {LearningOutcome}/> 
+          <Route path="/prof/new/finalgrade" component = {FinalGrade}/> 
 
       </div>
     </Router>
