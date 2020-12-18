@@ -43,7 +43,7 @@ export default class FinalGrade extends React.Component {
         var value = parseInt(target.value);
         if (isNaN(value)) { value = 0 };
         var newTotalWeight = this.state.totalWeight - lastValue + value;
-
+        if (newTotalWeight > 100){ alert('Total weight exceeded 100, please correct each input.');};
         this.setState({
             ...this.state,
             components: {
