@@ -2,34 +2,182 @@ import 'bulma/css/bulma.css';
 import React from 'react'
 
 // ga represents a list of GraduateAttributes that has an ID and a description
-const ga = {
-    'A1': 'A knowledge base for engineering',
-    'A2': 'Problem analysis',
-    'A3': 'Investigation',
-    'A4': 'Design',
-    'A5': 'Use of engineering tools',
-    'A6': 'Individual and team work',
-    'A7': 'Communication skills',
-    'A8': 'Professionalism',
-    'A9': 'Impact of engineering on society/environment',
-    'A10': 'Ethics and equity',
-    'A11': 'Economics and project management',
-    'A12': 'Life-long learning'
-};
+const ga = [
+    { label: 'A1 : A knowledge base for engineering' },
+    { label: 'A2 : Problem analysis' },
+    { label: 'A3 : Investigation' },
+    { label: 'A4 : Design' },
+    { label: 'A5 : Use of engineering tools' },
+    { label: 'A6 : Individual and team work' },
+    { label: 'A7 :  Communication skills' },
+    { label: 'A8 :  Professionalism' },
+    { label: 'A9 :  Impact of engineering on society/environment' },
+    { label: 'A10 :  Ethics and equity' },
+    { label: 'A11 :  Economics and project management' },
+    { label: 'A12 :  Life-long learning' }
+];
 
 // il represents a list of InstructionLevel that has an ID and a description
-const il = {
-    'I': 'Introduced',
-    'A': 'Applied',
-    'D': 'Developed'
+const il = [
+    { label: 'Applied' },
+    { label: 'Introduced' },
+    { label: 'Developed' }
+];
+
+const defaultOutcome = {
+    desc: "",
+    outGA: "A1. A knowledge base for engineering",
+    outIL: "Applied"
 };
 
-class LearningOutcome extends React.Component {
+export default class LearningOutcome extends React.Component {
+    constructor(props) {
+        super(props);
+        // this.setState({ tempoutcome: defaultOutcome });
+    }
+
     state = {
-        outcome: [], // include id, description, gaId, ilId
-        category: [], // include cat, element1, element2, au
-        section: [], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
-        labExp: [] // type, numOfLab, safetyTaught, safetyExamed
+        deleteID: 0,
+        editID: 0,
+        tempoutcome: {
+            desc: "",
+            outGA: "A1. A knowledge base for engineering",
+            outIL: "Applied"
+        },
+        outcomes: [
+            {
+                desc: "Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.",
+                outGA: "A1. A knowledge base for engineering",
+                outIL: "Applied"
+            },
+            {
+                desc: "Design and develop software programs in Java.",
+                outGA: "A4. Design",
+                outIL: "Applied"
+            },
+            {
+                desc: "Define the concepts of object-oriented design, such as inheritance and polymorphism.",
+                outGA: "A2. Problem analysis",
+                outIL: "Applied"
+            },
+            {
+                desc: "Apply miscellaneous programming concepts in Java, such as cloning, generic types, multi-threading, event-based programming, etc.",
+                outGA: "A5. Use of engineering tools",
+                outIL: "Applied"
+            }
+        ]
+        // category: [], // include cat, element1, element2, au
+        // section: [], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
+        // labExp: [] // type, numOfLab, safetyTaught, safetyExamed
+    }
+
+
+    updateOutGA(event) {
+        this.setState({ tempoutcome: { ...this.state.tempoutcome, outGA: event.target.value } });
+    }
+    updateOutIL(event) {
+        this.setState({ tempoutcome: { ...this.state.tempoutcome, outIL: event.target.value } });
+    }
+    updateDesc(event) {
+        this.setState({ tempoutcome: { ...this.state.tempoutcome, desc: event.target.value } });
+    }
+    updateDeleteID(event) {
+        this.setState({ deleteID: Number(event.target.value) });
+    }
+    updateEditID(event) {
+        this.setState({ editID: Number(event.target.value) });
+    }
+
+    handleAddOutcomeClick() {
+        if (this.state.tempoutcome.desc === "") {
+            return;
+        }
+        this.setState({
+            tempoutcome: defaultOutcome,
+            outcomes: [...this.state.outcomes, this.state.tempoutcome]
+        });
+    }
+
+    handleEditRowClick() {
+        if (this.state.editID.desc === -1) {
+            return;
+        }
+        let outcs = [...this.state.outcomes];
+        let outc = { ...outcs[this.state.editID] }
+        outc.outGA = this.state.tempoutcome.outGA
+        outc.outIL = this.state.tempoutcome.outIL
+        outcs[this.state.editID] = outc
+
+        this.setState({
+            outcomes: outcs
+        });
+    }
+
+    handleDeleteRowClick() {
+        if (this.state.deleteID.desc === -1) {
+            return;
+        }
+        let outcs = [...this.state.outcomes];
+        outcs.splice(this.state.deleteID, 1)
+        this.setState({
+            outcomes: outcs
+        });
+    }
+
+    renderTable1Data() {
+        return this.state.outcomes.map((outcome, index) => {
+            const { desc, outGA, outIL } = outcome //destructuring
+            return (
+                <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{desc}</td>
+                </tr>
+            )
+        })
+    }
+
+    renderTable1() {
+        return (
+            <div>
+                <table class="table" id='outcomes'>
+                    <tbody>
+                        {this.renderTable1Data()}
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+
+    renderTable2Data() {
+        return this.state.outcomes.map((outcome, index) => {
+            const { desc, outGA, outIL } = outcome //destructuring
+            return (
+                <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{outGA}</td>
+                    <td>{outIL}</td>
+                </tr>
+            )
+        })
+    }
+
+    renderTable2() {
+        return (
+            <div>
+                <table class="table" id='attributes'>
+                    <thead>
+                        <tr>
+                            <th>Learning Outcome</th>
+                            <th>Graduate Attribute</th>
+                            <th>Instruction Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderTable2Data()}
+                    </tbody>
+                </table>
+            </div>
+        )
     }
 
     render() {
@@ -57,22 +205,7 @@ class LearningOutcome extends React.Component {
                                 <body class="mt-3 mb-3">* Grey area will not show on final PDF.</body>
                                 <h2 class='title is-3'>List of Learning Outcomes</h2>
                                 <body>At the end of this course, you will be able to:</body>
-                                <table class='table is-hoverable is-striped'>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Design and develop software programs in Java.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Define the concepts of object-oriented design, such as inheritance and polymorphism.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                {this.renderTable1()}
                             </div>
                         </div>
                     </div>
@@ -80,10 +213,16 @@ class LearningOutcome extends React.Component {
                         <label class="label">Adding Learning Outcome</label>
                         <div class="columns">
                             <div class='column is-three-quarter'>
-                                <input class="textarea" placeholder="Pleas Input Outcome Description"></input>
+                                <input class="textarea" placeholder="Pleas Input Outcome Description"
+                                    value={this.state.tempoutcome.desc}
+                                    onChange={evt => this.updateDesc(evt)} >
+                                </input>
                             </div>
                             <div class='column is-one-quarter'>
-                                <button class="button is-link is-centered">Add Outcome</button>
+                                <button class="button is-link is-centered"
+                                    onClick={this.handleAddOutcomeClick.bind(this)}>
+                                    Add Outcome
+                                    </button>
                             </div>
                         </div>
                         <div class="columns">
@@ -93,16 +232,19 @@ class LearningOutcome extends React.Component {
                             <div class='column is-half'>
                                 <p>Learning Outcome</p>
                                 <div class="select is-small">
-                                    <select class="select">
-                                        <option selected>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <select value={this.state.deleteID}
+                                        onChange={evt => this.updateDeleteID(evt)}>
+                                        {this.state.outcomes.map((outcome, index) => (
+                                            <option value={index}>{index + 1}</option>))}
                                     </select>
                                 </div>
                             </div>
                             <div class="column mr-4">
-                                <button class="button is-link">Delete Outcome</button>
+                                <button class="button is-link"
+                                    onClick={this.handleDeleteRowClick.bind(this)}
+                                >
+                                    {/* onClick={this.handleDeleteRowClick.bind(this)} */}
+                                    Delete Outcome</button>
                             </div>
                         </div>
                     </div>
@@ -113,82 +255,50 @@ class LearningOutcome extends React.Component {
                         <div class='columns is-mobile is-left'>
                             <div class='column is-12'>
                                 <h2 class='title is-3'>Graduate Attribute Mapping Table</h2>
-                                <table class='table'>
-                                    <thead>
-                                        <tr>
-                                            <th>Learning Outcome</th>
-                                            <th>Graduate Attribute</th>
-                                            <th>Instruction Level</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>A1. A knowledge base for engineering</td>
-                                            <td>A (Applied)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>A2. Problem analysis</td>
-                                            <td>A (Applied)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>A3. Investigation</td>
-                                            <td>D (Developed)</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                {this.renderTable2()}
                             </div>
                         </div>
                     </div>
                     <div class="field mt-3">
                         <div class="columns">
                             <div class="column">
-                                <label class="label">Adding New Row</label>
+                                <label class="label">
+                                    Edit Row</label>
                             </div>
                             <div class="column">
                                 <p>Learning Outcome</p>
                                 <div class="select is-small">
-                                    <select class="select">
-                                        <option>4</option>
-                                        <option selected>3</option>
-                                        <option>2</option>
-                                        <option>1</option>
+                                    <select value={this.state.editID}
+                                        onChange={evt => this.updateEditID(evt)}>
+                                        {this.state.outcomes.map((outcome, index) => (
+                                            <option value={index}>{index + 1}</option>))}
                                     </select>
                                 </div>
                             </div>
                             <div class="column">
                                 <p>Graduate Attribute</p>
                                 <div class="select is-small">
-                                    <select class="select">
-                                        <option selected>A1. A knowledge base for engineering</option>
-                                        <option>A2. Problem analysis</option>
-                                        <option>A3. Investigation</option>
-                                        <option>A4. Design</option>
-                                        <option>A5. Use of engineering tools</option>
-                                        <option>A6. Individual and team work</option>
-                                        <option>A7. Communication skills</option>
-                                        <option>A8. Professionalism</option>
-                                        <option>A9. Impact of engineering on society/environment</option>
-                                        <option>A10. Ethics and equity</option>
-                                        <option>A11. Economics and project management</option>
-                                        <option>A12. Life-long learning</option>
+                                    <select value={this.state.tempoutcome.outGA}
+                                        onChange={evt => this.updateOutGA(evt)}>
+                                        {ga.map((option) => (
+                                            <option value={option.label}>{option.label}</option>))}
                                     </select>
                                 </div>
                             </div>
                             <div class="column">
                                 <p>Instruction Level</p>
                                 <div class="select is-small">
-                                    <select class="select">
-                                        <option>A (Applied)</option>
-                                        <option>D (Developed)</option>
-                                        <option>I (Introduced)</option>
+                                    <select value={this.state.tempoutcome.outIL}
+                                        onChange={evt => this.updateOutIL(evt)}>
+                                        {il.map((option) => (
+                                            <option value={option.label}>{option.label}</option>))}
                                     </select>
                                 </div>
                             </div>
-                            <div class="column">
-                                <button class="button is-link is-centered">Add Row</button>
+                            <div class="column"
+                                onClick={this.handleEditRowClick.bind(this)}
+                            >
+                                <button class="button is-link is-centered">Edit Row</button>
                             </div>
                         </div>
                         <div class="columns">
@@ -199,17 +309,20 @@ class LearningOutcome extends React.Component {
                             <div class='column'>
                                 <p>Learning Outcome</p>
                                 <div class="select is-small">
-                                    <select class="select">
-                                        <option selected>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <select value={this.state.deleteID}
+                                        onChange={evt => this.updateDeleteID(evt)}>
+                                        {this.state.outcomes.map((outcome, index) => (
+                                            <option value={index}>{index + 1}</option>))}
                                     </select>
                                 </div>
                             </div>
                             <div class='column'></div>
                             <div class="column ml-6">
-                                <button class="button is-link">Delete Row</button>
+                                <button class="button is-link"
+                                    onClick={this.handleDeleteRowClick.bind(this)}
+                                >
+                                    {/* onClick={this.handleDeleteRowClick.bind(this)} */}
+                                    Delete Row</button>
                             </div>
                         </div>
                     </div>
@@ -540,4 +653,3 @@ class LearningOutcome extends React.Component {
         );
     }
 }
-export default LearningOutcome;
