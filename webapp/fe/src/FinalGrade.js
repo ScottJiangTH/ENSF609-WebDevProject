@@ -36,14 +36,13 @@ export default class FinalGrade extends React.Component {
             }
         });
     }
-
     handleWeightChange(event) {
         const target = event.target;
         const name = target.name;
         const lastValue = this.state.components.weight[name];
         var value = parseInt(target.value);
-        var newTotalWeight = this.state.totalWeight - lastValue + value;
         if (isNaN(value)) { value = 0 };
+        var newTotalWeight = this.state.totalWeight - lastValue + value;
 
         this.setState({
             ...this.state,
@@ -57,19 +56,10 @@ export default class FinalGrade extends React.Component {
             totalWeight: newTotalWeight,
         });
     }
-
-    // updateTotalWeight() {
-    //     const newTotal = this.state.components.weight.assignments +
-    //         this.state.components.weight.project +
-    //         this.state.components.weight.midterm +
-    //         this.state.components.weight.final;
-    //     this.setState({ ...this.state, totalWeight: newTotal });
-    // }
-
     handleMinMarkChange(event) {
         const target = event.target;
         const name = target.name;
-        let value = parseInt(target.value);
+        var value = parseInt(target.value);
         if (isNaN(value)) { value = 0 };
 
         this.setState({
@@ -79,11 +69,10 @@ export default class FinalGrade extends React.Component {
                 min: {
                     ...this.state.chart.min,
                     [name]: value
-                }
-            }
+                },
+            },
         });
     }
-
     handleMaxMarkChange(event) {
         const target = event.target;
         const name = target.name;
@@ -101,6 +90,17 @@ export default class FinalGrade extends React.Component {
             }
         });
     }
+    handleSave(event) {
+        if (this.state === initialState) {
+          alert('No changes to be saved');
+        } else {
+          alert('All changes saved. Please proceed to next section.');
+        }
+      }
+      handleClear(event) {
+        this.setState(initialState);
+        alert('All fields cleared.');
+      }
 
     render() {
         return (
@@ -168,12 +168,12 @@ export default class FinalGrade extends React.Component {
                         </div>
                         <div class="column">
                             <input class="input" type="text" name='midterm'
-                                value={this.state.components.outcome.midterm} 
+                                value={this.state.components.outcome.midterm}
                                 onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
                             <input class="number" type="percentage" name='midterm'
-                                value={this.state.components.weight.midterm} 
+                                value={this.state.components.weight.midterm}
                                 onChange={event => this.handleWeightChange(event)}></input>
                         </div>
                     </div>
@@ -183,12 +183,12 @@ export default class FinalGrade extends React.Component {
                         </div>
                         <div class="column">
                             <input class="input" type="text" name='final'
-                                value={this.state.components.outcome.final} 
+                                value={this.state.components.outcome.final}
                                 onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
                             <input class="number" type="percentage" name='final'
-                                value={this.state.components.weight.final} 
+                                value={this.state.components.weight.final}
                                 onChange={event => this.handleWeightChange(event)}></input>
                         </div>
                     </div>
@@ -244,14 +244,21 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" 
-                                        value={this.state.chart.min.ap} 
-                                        onChange={event => this.handleMinMarkChange(event)}></input>
+                                    <input class="number" name='ap'
+                                        value={this.state.chart.min.ap}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'T <='}
                                 </div>
-                                <div class='column is-two-fifth'></div>
+                                <div class='column is-two-fifth'>
+                                    <input class="number" name='ap' disabled={true}
+                                        value={this.state.chart.max.ap}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -262,13 +269,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='a'
+                                        value={this.state.chart.min.a}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='a'
+                                        value={this.state.chart.max.a}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -280,13 +293,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='am'
+                                        value={this.state.chart.min.am}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='am'
+                                        value={this.state.chart.max.am}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -298,13 +317,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='bp'
+                                        value={this.state.chart.min.bp}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='bp'
+                                        value={this.state.chart.max.bp}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -316,13 +341,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='b'
+                                        value={this.state.chart.min.b}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='b'
+                                        value={this.state.chart.max.b}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -334,13 +365,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='bm'
+                                        value={this.state.chart.min.bm}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='bm'
+                                        value={this.state.chart.max.bm}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -352,13 +389,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='cp'
+                                        value={this.state.chart.min.cp}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='cp'
+                                        value={this.state.chart.max.cp}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -370,13 +413,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='c'
+                                        value={this.state.chart.min.c}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='c'
+                                        value={this.state.chart.max.c}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -388,13 +437,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='cm'
+                                        value={this.state.chart.min.cm}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='cm'
+                                        value={this.state.chart.max.cm}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -406,13 +461,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='dp'
+                                        value={this.state.chart.min.dp}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='dp'
+                                        value={this.state.chart.max.dp}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -424,13 +485,19 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='d'
+                                        value={this.state.chart.min.d}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
                                 </div>
                                 <div class='column is-one-fifth'>
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='d'
+                                        value={this.state.chart.max.d}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -441,12 +508,20 @@ export default class FinalGrade extends React.Component {
                         </div>
                         <div class="column is-two-third">
                             <div class='columns'>
-                                <div class='column is-two-fifth'></div>
+                                <div class='column is-two-fifth'>
+                                    <input class="number" name='f' disabled={true}
+                                        value={this.state.chart.min.f}
+                                        onChange={event => this.handleMinMarkChange(event)}>
+                                    </input>
+                                </div>
                                 <div class='column is-one-fifth'>
-                                    {'T <'}
+                                    {'   T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" name='f'
+                                        value={this.state.chart.max.f}
+                                        onChange={event => this.handleMaxMarkChange(event)}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
@@ -456,10 +531,10 @@ export default class FinalGrade extends React.Component {
                 <section class='columns m-6'>
                     <div class='column'></div>
                     <div class='column'>
-                        <button class='button is-link'>Save Changes</button>
+                        <button class='button is-link' onClick={evt => this.handleSave(evt)}>Save Changes</button>
                     </div>
                     <div class='column'>
-                        <button class='button is-link'>Clear Content</button>
+                        <button class='button is-link' onClick={evt => this.handleClear(evt)}>Clear Content</button>
                     </div>
                     <div class='column'>
                         <button class='button is-link'>Generate PDF</button>
