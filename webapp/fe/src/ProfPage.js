@@ -12,9 +12,9 @@ function ProfPage() {
                 </Link>
             </div>
             <div class='column'>
-
-                <button class='button is-large is-fullwidth is-rounded is-link'>Existing Form</button>
-
+                <Link to="/prof/existing">
+                    <button class='button is-large is-fullwidth is-rounded is-link'>Existing Form</button>
+                </Link>
             </div>
         </section>
     );

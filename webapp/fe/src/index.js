@@ -9,6 +9,7 @@ import CredentialBar from './CredentialsBar';
 import ProfFormBar from './ProfFormBar';
 import ProfPage from './ProfPage'
 import Welcome from './Welcome';
+import PageNotFound from './PageNotFound';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 ReactDOM.render(
@@ -18,8 +19,9 @@ ReactDOM.render(
         <CredentialBar />
           <Route path="/" exact component={Welcome}/>
           <Route path="/prof" exact component={ProfPage}/>
-          <Route path="/admin" />
+          <Route path="/admin" component={PageNotFound} />
           <Route path="/prof/new" component={ProfFormBar}/>
+          <Route path="/prof/existing" component={PageNotFound}/>
           <Route path="/prof/new/courseinfo" component = {CourseInfo}/> 
           <Route path="/prof/new/learningoutcome" component = {LearningOutcome}/> 
           <Route path="/prof/new/finalgrade" component = {FinalGrade}/> 
