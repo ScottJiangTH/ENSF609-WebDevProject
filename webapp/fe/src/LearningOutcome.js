@@ -247,7 +247,6 @@ export default class LearningOutcome extends React.Component {
                                 <button class="button is-link"
                                     onClick={this.handleDeleteRowClick.bind(this)}
                                 >
-                                    {/* onClick={this.handleDeleteRowClick.bind(this)} */}
                                     Delete Outcome</button>
                             </div>
                         </div>
