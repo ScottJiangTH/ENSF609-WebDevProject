@@ -34,6 +34,7 @@ export default class LearningOutcome extends React.Component {
     constructor(props) {
         super(props);
         // this.setState({ tempoutcome: defaultOutcome });
+        const initialState = this.state
     }
 
     state = {
@@ -44,6 +45,8 @@ export default class LearningOutcome extends React.Component {
             outGA: "A1. A knowledge base for engineering",
             outIL: "Applied"
         },
+        newid: 0
+        
         outcomes: [
             {
                 desc: "Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.",
@@ -66,6 +69,8 @@ export default class LearningOutcome extends React.Component {
                 outIL: "Applied"
             }
         ]
+
+
         // category: [], // include cat, element1, element2, au
         // section: [], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
         // labExp: [] // type, numOfLab, safetyTaught, safetyExamed
