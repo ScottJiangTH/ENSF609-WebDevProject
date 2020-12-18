@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import CourseInfo from './CourseInfo';
-import LearningOutcome from './LearningOutcome';
-import FinalGrade from './FinalGrade';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <CourseInfo />
-    <LearningOutcome />
-    <FinalGrade />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

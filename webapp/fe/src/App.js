@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bulma/css/bulma.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CourseInfo from './CourseInfo';
+import LearningOutcome from './LearningOutcome';
+import FinalGrade from './FinalGrade';
+import Nav from './Nav';
+import Admin from './Admin';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Nav />
+        <Route path='/nav' component={Nav} />
+        <Route path='/courseinfo' component={CourseInfo} />
+        <Route path='/learningoutcomes' component={LearningOutcome} />
+        <Route path='/finalgrade' component={FinalGrade} />
+        <Route path='/admin' component={Admin} />
+      </Router>
     </div>
   );
 }
