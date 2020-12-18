@@ -45,7 +45,7 @@ export default class LearningOutcome extends React.Component {
             outGA: "A1. A knowledge base for engineering",
             outIL: "Applied"
         },
-        newid: 0
+        newid: 0,
         
         outcomes: [
             {
