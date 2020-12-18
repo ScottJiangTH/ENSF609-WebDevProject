@@ -1,3 +1,8 @@
+
+/* .index {
+  text-align: center;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +15,50 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+.CrBar{
+  
+  display : flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 5vh;
+  background-color: rgb(68, 68, 68);
+  color: wheat;
+  
+}
+.CrLinks{
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: right;
+  list-style: none;
+ 
+}
+
+.ProfBar{
+  
+  display : flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 5vh;
+  background-color: rgb(206, 76, 25);
+  color: rgb(44, 44, 44);
+  
+}
+.ProfLinks{
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: right;
+  list-style: none;
+ 
+}
+.landing{
+  height:80vh;
+  width:75%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  
 }
