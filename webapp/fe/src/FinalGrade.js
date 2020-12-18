@@ -1,11 +1,13 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
+//import addNumbers from "./components/addNumbers"
 
 const initialState = {
     components: {
         outcome: { assignments: '1-7', project: '1-7', midterm: '1-7', final: '1-7' },
-        weight: { assignments: 25, project: 25, midterm: 25, final: 25, totalWeight: 100 }
+        weight: { assignments: 25, project: 25, midterm: 25, final: 25 }
     },
+    totalWeight: 100,
     chart: {
         min: { ap: 95, a: 90, am: 85, bp: 80, b: 75, bm: 70, cp: 65, c: 60, cm: 56, dp: 53, d: 50, f: 0 },
         max: { ap: 100, a: 95, am: 90, bp: 85, b: 80, bm: 75, cp: 70, c: 65, cm: 60, dp: 56, d: 53, f: 50 }
@@ -38,7 +40,9 @@ export default class FinalGrade extends React.Component {
     handleWeightChange(event) {
         const target = event.target;
         const name = target.name;
-        let value = parseInt(target.value);
+        const lastValue = this.state.components.weight[name];
+        var value = parseInt(target.value);
+        var newTotalWeight = this.state.totalWeight - lastValue + value;
         if (isNaN(value)) { value = 0 };
 
         this.setState({
@@ -47,6 +51,51 @@ export default class FinalGrade extends React.Component {
                 ...this.state.components,
                 weight: {
                     ...this.state.components.weight,
+                    [name]: value
+                },
+            },
+            totalWeight: newTotalWeight,
+        });
+    }
+
+    // updateTotalWeight() {
+    //     const newTotal = this.state.components.weight.assignments +
+    //         this.state.components.weight.project +
+    //         this.state.components.weight.midterm +
+    //         this.state.components.weight.final;
+    //     this.setState({ ...this.state, totalWeight: newTotal });
+    // }
+
+    handleMinMarkChange(event) {
+        const target = event.target;
+        const name = target.name;
+        let value = parseInt(target.value);
+        if (isNaN(value)) { value = 0 };
+
+        this.setState({
+            ...this.state,
+            chart: {
+                ...this.state.chart,
+                min: {
+                    ...this.state.chart.min,
+                    [name]: value
+                }
+            }
+        });
+    }
+
+    handleMaxMarkChange(event) {
+        const target = event.target;
+        const name = target.name;
+        let value = parseInt(target.value);
+        if (isNaN(value)) { value = 0 };
+
+        this.setState({
+            ...this.state,
+            chart: {
+                ...this.state.chart,
+                min: {
+                    ...this.state.chart.max,
                     [name]: value
                 }
             }
@@ -88,12 +137,12 @@ export default class FinalGrade extends React.Component {
                             <label class="label">Assignments</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" placeholder="1-7" name='assignments'
+                            <input class="input" type="text" name='assignments'
                                 value={this.state.components.outcome.assignments}
                                 onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
-                            <input class="number" type="percentage" placeholder="%" name='assignments'
+                            <input class="number" type="percentage" name='assignments'
                                 value={this.state.components.weight.assignments}
                                 onChange={event => this.handleWeightChange(event)}></input>
                         </div>
@@ -103,12 +152,12 @@ export default class FinalGrade extends React.Component {
                             <label class="label">Project</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" placeholder="1-7" name='project'
+                            <input class="input" type="text" name='project'
                                 value={this.state.components.outcome.project}
                                 onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
-                            <input class="number" type="percentage" placeholder="%" name='project'
+                            <input class="number" type="percentage" name='project'
                                 value={this.state.components.weight.project}
                                 onChange={event => this.handleWeightChange(event)}></input>
                         </div>
@@ -118,13 +167,13 @@ export default class FinalGrade extends React.Component {
                             <label class="label">Midterm Examination</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" placeholder="1-7" name='midterm'
-                                value={this.state.components.outcome.midterm}
+                            <input class="input" type="text" name='midterm'
+                                value={this.state.components.outcome.midterm} 
                                 onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
-                            <input class="number" type="percentage" placeholder="%" name='midterm'
-                                value={this.state.components.weight.midterm}
+                            <input class="number" type="percentage" name='midterm'
+                                value={this.state.components.weight.midterm} 
                                 onChange={event => this.handleWeightChange(event)}></input>
                         </div>
                     </div>
@@ -133,13 +182,13 @@ export default class FinalGrade extends React.Component {
                             <label class="label">Final Examination</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" placeholder="1-7" name='final'
-                                value={this.state.components.outcome.final}
+                            <input class="input" type="text" name='final'
+                                value={this.state.components.outcome.final} 
                                 onChange={event => this.handleOutcomeChange(event)}></input>
                         </div>
                         <div class="column">
-                            <input class="number" type="percentage" placeholder="%" name='final'
-                                value={this.state.components.weight.final}
+                            <input class="number" type="percentage" name='final'
+                                value={this.state.components.weight.final} 
                                 onChange={event => this.handleWeightChange(event)}></input>
                         </div>
                     </div>
@@ -161,7 +210,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column">
                             <input class="number" type="percentage"
                                 placeholder="%" disabled={true}
-                                value={this.state.components.weight.totalWeight}></input>
+                                value={this.state.totalWeight}></input>
                         </div>
                     </div>
                 </section>
@@ -194,13 +243,15 @@ export default class FinalGrade extends React.Component {
                         </div>
                         <div class="column is-two-third">
                             <div class='columns'>
-                                <div class='column is-two-fifth'></div>
-                                <div class='column is-one-fifth'>
-                                    {'T >='}
-                                </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="input" type="percentage" placeholder="%"></input>
+                                    <input class="number" 
+                                        value={this.state.chart.min.ap} 
+                                        onChange={event => this.handleMinMarkChange(event)}></input>
                                 </div>
+                                <div class='column is-one-fifth'>
+                                    {'T <='}
+                                </div>
+                                <div class='column is-two-fifth'></div>
                             </div>
                         </div>
                     </div>
