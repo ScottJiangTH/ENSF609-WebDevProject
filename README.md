@@ -15,4 +15,6 @@ Project management files are stored with the structure:
 - 3 sprint meetings are schduled on date Dec 14, 2020, Dec 30, 2020 and Jan 10, 2020. Each sprint meeting are stored in subfolder of `ProjectManagement` separately.
 - Scrum activities are scheduled to take place every 2-3 days, all scrum activities will be summarized and stored in each sprint subfolder.
 
-##
+## Backend development Note
+### Relational Data Scheme
+https://lucid.app/lucidchart/invitations/accept/aff3c9a7-a178-4e08-9b43-20a7944f57a7
