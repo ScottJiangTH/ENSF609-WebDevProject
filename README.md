@@ -18,3 +18,7 @@ Project management files are stored with the structure:
 ## Backend development Note
 ### Relational Data Scheme
 https://lucid.app/lucidchart/invitations/accept/aff3c9a7-a178-4e08-9b43-20a7944f57a7
+### 3rd Party Library Installed
+pip install djangorestframework
+pip install django-cors-headers
+pip install django-composite-foreignkey
