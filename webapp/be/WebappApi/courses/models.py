@@ -10,16 +10,23 @@ class Course(models.Model):
     refUrl = models.CharField(max_length=2000, null=True)
 
 class Outcome(models.Model):
-    id = models.PositiveIntegerField(primary_key=True)
+    oid = models.PositiveIntegerField()
+    courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE)
     description = models.CharField(max_length=2000, null=False)
-    courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
+    class Meta:
+        unique_together = [
+            ("id", "courseNumber"),
+        ]
 
 class GraduateAttribute(models.Model):
-    id = models.CharField(max_length=10, null=False, primary_key=True)
-    courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
-    oid = models.ForeignKey(Outcome, on_delete=models.CASCADE, primary_key=True)
+    gid = models.CharField(max_length=10, null=False)
+    oid = models.ForeignKey(Course, on_delete=models.CASCADE)
     description = models.CharField(max_length=2000, null=True)
     instructionLevel = models.CharField(max_length=50, null=True)
+    class Meta:
+        unique_together = [
+            ("gid", "oid"),
+        ]
 
 class ContentCategory(models.Model):
     math1 = models.CharField(max_length=20, null=False)
@@ -33,7 +40,7 @@ class ContentCategory(models.Model):
     csAU = models.PositiveIntegerField()
     esAU = models.PositiveIntegerField()
     edAU = models.PositiveIntegerField()
-    courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
+    courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
 
 class Section(models.Model):
     lectureSections = models.PositiveIntegerField()
@@ -45,14 +52,14 @@ class Section(models.Model):
     labSections = models.PositiveIntegerField()
     lablHours = models.PositiveIntegerField()
     labNSPS = models.PositiveIntegerField()
-    courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
+    courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
 
 class labExperience(models.Model):
     labType = models.CharField(max_length=20, null=False)
     numberOfLabs = models.PositiveIntegerField()
     safetyTaught = models.BooleanField()
     safetyExamined = models.BooleanField()
-    courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
+    courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
 
 class finalGrade(models.Model):
     assignmentsOutcomes = models.CharField(max_length=20, null=False)
@@ -63,7 +70,7 @@ class finalGrade(models.Model):
     midtermWeight = models.PositiveIntegerField()
     finalOutcomes = models.CharField(max_length=20, null=False)
     finalWeight = models.PositiveIntegerField()
-    courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
+    courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
 
 class letterGrade(models.Model):
     apLow = models.PositiveIntegerField()
@@ -90,4 +97,4 @@ class letterGrade(models.Model):
     dHigh = models.PositiveIntegerField()
     fLow = models.PositiveIntegerField()
     fHigh = models.PositiveIntegerField()
-    courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE, primary_key=True)
+    courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
