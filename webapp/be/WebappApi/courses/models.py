@@ -54,14 +54,14 @@ class Section(models.Model):
     labNSPS = models.PositiveIntegerField()
     courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
 
-class labExperience(models.Model):
+class LabExperience(models.Model):
     labType = models.CharField(max_length=20, null=False)
     numberOfLabs = models.PositiveIntegerField()
     safetyTaught = models.BooleanField()
     safetyExamined = models.BooleanField()
     courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
 
-class finalGrade(models.Model):
+class FinalGrade(models.Model):
     assignmentsOutcomes = models.CharField(max_length=20, null=False)
     assignmentsWeight = models.PositiveIntegerField()
     projectOutcomes = models.CharField(max_length=20, null=False)
@@ -72,7 +72,7 @@ class finalGrade(models.Model):
     finalWeight = models.PositiveIntegerField()
     courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
 
-class letterGrade(models.Model):
+class LetterGrade(models.Model):
     apLow = models.PositiveIntegerField()
     apHigh = models.PositiveIntegerField()
     aLow = models.PositiveIntegerField()
