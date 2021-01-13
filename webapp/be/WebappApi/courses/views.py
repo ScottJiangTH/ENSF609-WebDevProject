@@ -31,7 +31,7 @@ def course_list(request):
         
         courseNumber = request.query_params.get('courseNumber', None)
         if courseNumber is not None:
-            courses = courses.filter(title__icontains=courseNumber)
+            courses = courses.filter(courseNumber=courseNumber)
         
         courses_serializer = CourseSerializer(courses, many=True)
         return JsonResponse(courses_serializer.data, safe=False)
@@ -46,31 +46,31 @@ def course_list(request):
         return JsonResponse(course_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     elif request.method == 'DELETE':
-        count = Echo.objects.all().delete()
-        return JsonResponse({'message': '{} Echos were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+        count = Course.objects.all().delete()
+        return JsonResponse({'message': '{} courses were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
  
  
 @api_view(['GET', 'PUT', 'DELETE'])
 def course_detail(request, pk):
     try: 
-        echo = Echo.objects.get(pk=pk) 
-    except Echo.DoesNotExist: 
-        return JsonResponse({'message': 'The echo does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+        course = Course.objects.get(pk=pk)
+        
+    except Course.DoesNotExist: 
+        return JsonResponse({'message': 'The course does not exist'}, status=status.HTTP_404_NOT_FOUND) 
  
     if request.method == 'GET': 
-        echo_serializer = EchoSerializer(echo) 
-        return JsonResponse(echo_serializer.data) 
+        course_serializer = CourseSerializer(course) 
+        return JsonResponse(course_serializer.data) 
  
     elif request.method == 'PUT': 
-        echo_data = JSONParser().parse(request) 
-        echo_serializer = EchoSerializer(echo, data=echo_data) 
-        if echo_serializer.is_valid(): 
-            echo_serializer.save() 
-            return JsonResponse(echo_serializer.data) 
-        return JsonResponse(echo_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+        course_data = JSONParser().parse(request) 
+        course_serializer = CourseSerializer(course, data=course_data) 
+        if course_serializer.is_valid(): 
+            course_serializer.save() 
+            return JsonResponse(course_serializer.data) 
+        return JsonResponse(course_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
  
     elif request.method == 'DELETE': 
-        echo.delete() 
-        return JsonResponse({'message': 'Echo was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+        course.delete() 
+        return JsonResponse({'message': 'Course was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
-        

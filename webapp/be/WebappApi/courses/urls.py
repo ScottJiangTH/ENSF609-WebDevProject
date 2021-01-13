@@ -3,5 +3,5 @@ from courses import views
 
 urlpatterns = [ 
     url(r'api/courses$', views.course_list),
-    url(r'api/courses/(?P<pk>[0-9]+)$', views.course_detail),
+    url(r'api/courses/(?P<pk>\w+\s\d+)$', views.course_detail),
 ]

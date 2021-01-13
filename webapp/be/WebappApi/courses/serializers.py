@@ -7,7 +7,7 @@ from courses.models import Section
 from courses.models import LabExperience
 from courses.models import FinalGrade
 from courses.models import LetterGrade
- 
+
 class CourseSerializer(serializers.ModelSerializer):
  
     class Meta:
@@ -129,3 +129,13 @@ class LetterGradeSerializer(serializers.ModelSerializer):
                 'fHigh',
                 'courseNumber',
             )
+
+class CombinedSerializer(serializers.Serializer):
+    courseInfo = CourseSerializer(many=True)
+    outcome = OutcomeSerializer(many=True)
+    graduateAttribute = GraduateAttributeSerializer(many=True)
+    contentCategory = ContentCategorySerializer(many=True)
+    section = SectionSerializer(many=True)
+    labExperience = LabExperienceSerializer(many=True)
+    finalGrade = FinalGradeSerializer(many=True)
+    letterGrade = LetterGradeSerializer(many=True)

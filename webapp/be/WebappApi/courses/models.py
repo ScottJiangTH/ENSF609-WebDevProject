@@ -9,13 +9,14 @@ class Course(models.Model):
     labHours = models.PositiveIntegerField(null=False)
     refUrl = models.CharField(max_length=2000, null=True)
 
+
 class Outcome(models.Model):
     oid = models.PositiveIntegerField()
     courseNumber = models.ForeignKey(Course, on_delete=models.CASCADE)
     description = models.CharField(max_length=2000, null=False)
     class Meta:
         unique_together = [
-            ("id", "courseNumber"),
+            ("oid", "courseNumber"),
         ]
 
 class GraduateAttribute(models.Model):
