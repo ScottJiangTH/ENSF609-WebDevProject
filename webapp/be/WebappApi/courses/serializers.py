@@ -19,7 +19,7 @@ class GraduateAttributeSerializer(serializers.ModelSerializer):
                 ]
 
 class OutcomeSerializer(serializers.ModelSerializer):
-    graduateAttributes = GraduateAttributeSerializer(many=True, read_only=True)
+    graduateAttributes = GraduateAttributeSerializer(many=True, read_only=True, source='graduateattribute_set')
 
     class Meta:
         model = Outcome
@@ -120,8 +120,13 @@ class LetterGradeSerializer(serializers.ModelSerializer):
                 ]
 
 class CourseSerializer(serializers.ModelSerializer):
-    outcomes = OutcomeSerializer(many=True, read_only=True)
-    finalGrade = FinalGradeSerializer(many=True, read_only=True)
+    outcomes = OutcomeSerializer(many=True, read_only=True, source='outcome_set')
+    contentCategory = ContentCategorySerializer(many=False, read_only=True, source='contentcategory')
+    sections = SectionSerializer(many=False, read_only=True, source='section')
+    labExperience = LabExperienceSerializer(many=False, read_only=True, source='labexperience')
+    finalGrade = FinalGradeSerializer(many=False, read_only=True, source='finalgrade')
+    letterGrade = LetterGradeSerializer(many=False, read_only=True, source='lettergrade')
+
 
     class Meta:
         model = Course
@@ -133,5 +138,9 @@ class CourseSerializer(serializers.ModelSerializer):
                   'labHours',
                   'refUrl',
                   'outcomes',
+                  'contentCategory',
+                  'sections',
+                  'labExperience',
                   'finalGrade',
+                  'letterGrade',
                   ]

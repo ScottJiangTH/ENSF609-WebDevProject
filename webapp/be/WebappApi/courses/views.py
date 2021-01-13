@@ -5,22 +5,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
  
 from courses.models import Course
-from courses.models import Outcome
-from courses.models import GraduateAttribute
-from courses.models import ContentCategory
-from courses.models import Section
-from courses.models import LabExperience
-from courses.models import FinalGrade
-from courses.models import LetterGrade
-
 from courses.serializers import CourseSerializer
-from courses.serializers import OutcomeSerializer
-from courses.serializers import GraduateAttributeSerializer
-from courses.serializers import ContentCategorySerializer
-from courses.serializers import SectionSerializer
-from courses.serializers import LabExperienceSerializer
-from courses.serializers import FinalGradeSerializer
-from courses.serializers import LetterGradeSerializer
 
 from rest_framework.decorators import api_view
 
