@@ -5,6 +5,9 @@
 		}
 	],
 	"settings": {
-		"git.ignoreLimitWarning": true
+		"python.pythonPath": "/Users/scottj/Library/Mobile Documents/com~apple~CloudDocs/UofC/ENSF-609-610/ENSF609-WebDevProject/lib/python3.8",
+		"python.sortImports.path": "/Users/scottj/Library/Mobile Documents/com~apple~CloudDocs/UofC/ENSF-609-610/ENSF609-WebDevProject/lib/python3.8",
+		"python.venvPath": "/Users/scottj/Library/Mobile Documents/com~apple~CloudDocs/UofC/ENSF-609-610/ENSF609-WebDevProject",
+		"python.linting.pylintPath": "/Users/scottj/Library/Mobile Documents/com~apple~CloudDocs/UofC/ENSF-609-610/ENSF609-WebDevProject/lib/python3.8/site-packages/pylint"
 	}
 }

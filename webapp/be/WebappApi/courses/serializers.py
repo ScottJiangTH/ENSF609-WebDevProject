@@ -8,43 +8,32 @@ from courses.models import LabExperience
 from courses.models import FinalGrade
 from courses.models import LetterGrade
 
-class CourseSerializer(serializers.ModelSerializer):
- 
-    class Meta:
-        model = Course
-        fields = ('courseNumber',
-                  'courseName',
-                  'courseDescription',
-                  'academicCredit',
-                  'lectureHours',
-                  'labHours',
-                  'refUrl',
-                  )
-
-class OutcomeSerializer(serializers.ModelSerializer):
- 
-    class Meta:
-        model = Outcome
-        fields = ('oid',
-                'description', 
-                'courseNumber', 
-                )
-
 class GraduateAttributeSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = GraduateAttribute
-        fields = ('gid',
+        fields = ['gid',
                 'description', 
                 'instructionLevel', 
                 'oid',
-                )
+                ]
+
+class OutcomeSerializer(serializers.ModelSerializer):
+    graduateAttributes = GraduateAttributeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Outcome
+        fields = ['oid',
+                'description', 
+                'courseNumber', 
+                'graduateAttributes',
+                ]
 
 class ContentCategorySerializer(serializers.ModelSerializer):
  
     class Meta:
         model = ContentCategory
-        fields = ('math1',
+        fields = ['math1',
                 'math2', 
                 'mathAU', 
                 'ns1', 
@@ -56,13 +45,13 @@ class ContentCategorySerializer(serializers.ModelSerializer):
                 'esAU', 
                 'edAU', 
                 'courseNumber', 
-                )
+                ]
 
 class SectionSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Section
-        fields = ('lectureSections', 
+        fields = ['lectureSections', 
             'lectureHours', 
             'lectureNSPS', 
             'tutorialSections', 
@@ -72,24 +61,24 @@ class SectionSerializer(serializers.ModelSerializer):
             'lablHours', 
             'labNSPS', 
             'courseNumber', 
-            )
+            ]
 
 class LabExperienceSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = LabExperience
-        fields = ('labType',
+        fields = ['labType',
                 'numberOfLabs',
                 'safetyTaught',
                 'safetyExamined',
                 'courseNumber', 
-            )
+                ]
 
 class FinalGradeSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = FinalGrade
-        fields = ('assignmentsOutcomes',
+        fields = ['assignmentsOutcomes',
                 'assignmentsWeight',
                 'projectOutcomes',
                 'midtermOutcomes',
@@ -97,13 +86,13 @@ class FinalGradeSerializer(serializers.ModelSerializer):
                 'finalOutcomes',
                 'finalWeight',
                 'courseNumber', 
-            )
+                ]
 
 class LetterGradeSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = LetterGrade
-        fields = ('apLow', 
+        fields = ['apLow', 
                 'apHigh',
                 'aLow',
                 'aHigh',
@@ -128,14 +117,21 @@ class LetterGradeSerializer(serializers.ModelSerializer):
                 'fLow',
                 'fHigh',
                 'courseNumber',
-            )
+                ]
 
-class CombinedSerializer(serializers.Serializer):
-    courseInfo = CourseSerializer(many=True)
-    outcome = OutcomeSerializer(many=True)
-    graduateAttribute = GraduateAttributeSerializer(many=True)
-    contentCategory = ContentCategorySerializer(many=True)
-    section = SectionSerializer(many=True)
-    labExperience = LabExperienceSerializer(many=True)
-    finalGrade = FinalGradeSerializer(many=True)
-    letterGrade = LetterGradeSerializer(many=True)
+class CourseSerializer(serializers.ModelSerializer):
+    outcomes = OutcomeSerializer(many=True, read_only=True)
+    finalGrade = FinalGradeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Course
+        fields = ['courseNumber',
+                  'courseName',
+                  'courseDescription',
+                  'academicCredit',
+                  'lectureHours',
+                  'labHours',
+                  'refUrl',
+                  'outcomes',
+                  'finalGrade',
+                  ]
