@@ -22,9 +22,12 @@ export default class ExistingForm extends React.Component {
 
     render() {
         return (
-            <div className="col">
-                {this.state.courses.map(course => <div>{course.courseNumber}: {course.courseName}</div>)}
-          </div>
+            <div>
+                {this.state.courses.map(course => 
+                <div key={course.courseNumber}>
+                    {course.courseNumber}: {course.courseName}
+                </div>)}
+            </div>
         )
     }
 }
