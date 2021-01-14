@@ -13,8 +13,10 @@ export default class ExistingForm extends React.Component {
     }
 
     componentDidMount() {
-        connect.getCourses().then(function (result) {
-            this.setState({ courses:  result.data})
+        var self = this;
+        connect.getCourses().then(function(result){
+            console.log(result);
+            self.setState({ courses:  result.data})
         });
     }
 
@@ -24,15 +26,11 @@ export default class ExistingForm extends React.Component {
             <table  className="table">
             <thead  key="thead">
             <tr>
-                <th>#</th>
                 <th>Course Number</th>
             </tr>
             </thead>
             <tbody>
-            {this.state.courses.map( c  =>
-                <tr  key={c.courseNumber}>
-                <td>{c.pk}  </td>
-            </tr>)}
+            {this.state.courses}
             </tbody>
             </table>
         </div>

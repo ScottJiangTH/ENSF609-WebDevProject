@@ -16,7 +16,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <div classname= 'index'>
+      <div className= 'index'>
         <CredentialBar />
           <Route path="/" exact component={Welcome}/>
           <Route path="/prof" exact component={ProfPage}/>
