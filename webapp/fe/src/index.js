@@ -10,6 +10,7 @@ import ProfFormBar from './ProfFormBar';
 import ProfPage from './ProfPage'
 import Welcome from './Welcome';
 import PageNotFound from './PageNotFound';
+import ExistingForm from './ExistingForm';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 ReactDOM.render(
@@ -21,7 +22,7 @@ ReactDOM.render(
           <Route path="/prof" exact component={ProfPage}/>
           <Route path="/admin" component={PageNotFound} />
           <Route path="/prof/new" component={ProfFormBar}/>
-          <Route path="/prof/existing" component={PageNotFound}/>
+          <Route path="/prof/existing" component={ExistingForm}/>
           <Route path="/prof/new/courseinfo" component = {CourseInfo}/> 
           <Route path="/prof/new/learningoutcome" component = {LearningOutcome}/> 
           <Route path="/prof/new/finalgrade" component = {FinalGrade}/> 
