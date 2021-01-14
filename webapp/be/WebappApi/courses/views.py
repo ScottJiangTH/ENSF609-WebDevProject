@@ -17,7 +17,7 @@ def course_list(request):
         courseNumber = request.query_params.get('courseNumber', None)
         if courseNumber is not None:
             courses = courses.filter(courseNumber=courseNumber)
-        
+            
         courses_serializer = CourseSerializer(courses, many=True)
         return JsonResponse(courses_serializer.data, safe=False)
         # 'safe=False' for objects serialization
