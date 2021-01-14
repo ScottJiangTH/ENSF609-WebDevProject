@@ -5,8 +5,7 @@ export default class Connect{
     
     getCourses(){
         const url = `${API_URL}/api/courses`;
-        return axios.get(url)
-        .then(response => response.data);
+        return axios.get(url);
     }
     getCourse(courseNumber){
         const url = `${API_URL}/api/courses/${courseNumber}`;

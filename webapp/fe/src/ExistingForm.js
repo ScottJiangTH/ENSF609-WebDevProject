@@ -14,26 +14,17 @@ export default class ExistingForm extends React.Component {
 
     componentDidMount() {
         var self = this;
-        connect.getCourses().then(function(result){
-            console.log(result);
-            self.setState({ courses:  result.data})
+        connect.getCourses().then((response) =>{
+            console.log(response);
+            self.setState({ courses:  response.data})
         });
     }
 
     render() {
         return (
-            <div  className="customers--list">
-            <table  className="table">
-            <thead  key="thead">
-            <tr>
-                <th>Course Number</th>
-            </tr>
-            </thead>
-            <tbody>
-            {this.state.courses}
-            </tbody>
-            </table>
-        </div>
+            <div className="col">
+                {this.state.courses.map(course => <div>{course.courseNumber}: {course.courseName}</div>)}
+          </div>
         )
     }
 }
