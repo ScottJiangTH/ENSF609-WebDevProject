@@ -58,7 +58,7 @@ class SectionSerializer(serializers.ModelSerializer):
             'tutorialHours', 
             'tutorialNSPS', 
             'labSections', 
-            'lablHours', 
+            'labHours', 
             'labNSPS', 
             'courseNumber', 
             ]

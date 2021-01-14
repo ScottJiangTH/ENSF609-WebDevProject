@@ -51,7 +51,7 @@ class Section(models.Model):
     tutorialHours = models.PositiveIntegerField(blank=True, null=True)
     tutorialNSPS = models.PositiveIntegerField(blank=True, null=True)
     labSections = models.PositiveIntegerField(blank=True, null=True)
-    lablHours = models.PositiveIntegerField(blank=True, null=True)
+    labHours = models.PositiveIntegerField(blank=True, null=True)
     labNSPS = models.CharField(max_length=20, blank=True, null=True)
     courseNumber = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
 
