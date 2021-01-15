@@ -1,7 +1,7 @@
 from django.db import models
 
 class Course(models.Model):
-    courseNumber = models.CharField(max_length=70, null=False)
+    courseNumber = models.CharField(max_length=70, null=False, primary_key=True)
     courseName = models.CharField(max_length=500, null=False)
     courseDescription = models.CharField(max_length=2000, null=True)
     academicCredit = models.PositiveIntegerField(null=False)
