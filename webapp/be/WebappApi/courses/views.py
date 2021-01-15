@@ -48,12 +48,13 @@ def course_detail(request, pk):
         return JsonResponse(course_serializer.data) 
  
     elif request.method == 'PUT': 
-        course_data = JSONParser().parse(request) 
-        course_serializer = CourseSerializer(course, data=course_data) 
-        if course_serializer.is_valid(): 
-            course_serializer.save() 
-            return JsonResponse(course_serializer.data) 
-        return JsonResponse(course_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+        course.delete()
+        course_data = JSONParser().parse(request)
+        course_serializer = CourseSerializer(data=course_data)
+        if course_serializer.is_valid():
+            course_serializer.save()
+            return JsonResponse(course_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(course_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
  
     elif request.method == 'DELETE': 
         course.delete() 

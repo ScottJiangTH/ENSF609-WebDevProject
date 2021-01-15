@@ -139,7 +139,6 @@ class CourseSerializer(serializers.ModelSerializer):
                   ]
     
     def create(self, validated_data):
-        print(validated_data)
         outcomes_data = validated_data.pop('outcome_set')
         contentCategory_data = validated_data.pop('contentcategory_set')
         sections_data = validated_data.pop('section_set')
@@ -171,4 +170,3 @@ class CourseSerializer(serializers.ModelSerializer):
             LetterGrade.objects.create(course=course, **letterGrade_data)
         
         return course
-   
