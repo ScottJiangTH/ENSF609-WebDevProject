@@ -4,17 +4,17 @@ class Course(models.Model):
     courseNumber = models.CharField(max_length=70, null=False, primary_key=True)
     courseName = models.CharField(max_length=500, null=False)
     courseDescription = models.CharField(max_length=2000, null=True)
-    academicCredit = models.PositiveIntegerField(null=False)
-    lectureHours = models.PositiveIntegerField(null=False)
-    labHours = models.PositiveIntegerField(null=False)
+    academicCredit = models.PositiveIntegerField(null=True)
+    lectureHours = models.PositiveIntegerField(null=True)
+    labHours = models.PositiveIntegerField(null=True)
     refUrl = models.CharField(max_length=2000, null=True)
 
 class Outcome(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=0)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     description = models.CharField(max_length=2000, null=False)
 
 class GraduateAttribute(models.Model):
-    outcome = models.ForeignKey(Outcome, on_delete=models.CASCADE, default=0)
+    outcome = models.ForeignKey(Outcome, on_delete=models.CASCADE)
     description = models.CharField(max_length=2000, null=True)
     instructionLevel = models.CharField(max_length=50, null=True)
 
@@ -30,7 +30,7 @@ class ContentCategory(models.Model):
     csAU = models.IntegerField(blank=True, null=True)
     esAU = models.IntegerField(blank=True, null=True)
     edAU = models.IntegerField(blank=True, null=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=0)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
 class Section(models.Model):
     lectureSections = models.PositiveIntegerField(blank=True, null=True)
@@ -42,14 +42,14 @@ class Section(models.Model):
     labSections = models.PositiveIntegerField(blank=True, null=True)
     labHours = models.PositiveIntegerField(blank=True, null=True)
     labNSPS = models.CharField(max_length=20, blank=True, null=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=0)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
 class LabExperience(models.Model):
     labType = models.CharField(max_length=20, null=False)
     numberOfLabs = models.PositiveIntegerField()
     safetyTaught = models.BooleanField()
     safetyExamined = models.BooleanField()
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=0)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
 class FinalGrade(models.Model):
     assignmentsOutcomes = models.CharField(max_length=20, null=False)
@@ -60,7 +60,7 @@ class FinalGrade(models.Model):
     midtermWeight = models.PositiveIntegerField(null=False)
     finalOutcomes = models.CharField(max_length=20, null=False)
     finalWeight = models.PositiveIntegerField(null=False)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=0)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
 class LetterGrade(models.Model):
     apLow = models.PositiveIntegerField()
@@ -87,4 +87,4 @@ class LetterGrade(models.Model):
     dHigh = models.PositiveIntegerField()
     fLow = models.PositiveIntegerField()
     fHigh = models.PositiveIntegerField()
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=0)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)

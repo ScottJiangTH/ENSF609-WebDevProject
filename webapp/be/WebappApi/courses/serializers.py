@@ -39,7 +39,7 @@ class ContentCategorySerializer(serializers.ModelSerializer):
                 'cs2', 
                 'csAU', 
                 'esAU', 
-                'edAU'
+                'edAU',
                 ]
 
 class SectionSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class SectionSerializer(serializers.ModelSerializer):
             'tutorialNSPS', 
             'labSections', 
             'labHours', 
-            'labNSPS'
+            'labNSPS',
             ]
 
 class LabExperienceSerializer(serializers.ModelSerializer):
@@ -64,7 +64,7 @@ class LabExperienceSerializer(serializers.ModelSerializer):
         fields = ['labType',
                 'numberOfLabs',
                 'safetyTaught',
-                'safetyExamined'
+                'safetyExamined',
                 ]
 
 class FinalGradeSerializer(serializers.ModelSerializer):
@@ -78,7 +78,7 @@ class FinalGradeSerializer(serializers.ModelSerializer):
                 'midtermOutcomes',
                 'midtermWeight',
                 'finalOutcomes',
-                'finalWeight'
+                'finalWeight',
                 ]
 
 class LetterGradeSerializer(serializers.ModelSerializer):
@@ -108,7 +108,7 @@ class LetterGradeSerializer(serializers.ModelSerializer):
                 'dLow',
                 'dHigh',
                 'fLow',
-                'fHigh'
+                'fHigh',
                 ]
 
 class CourseSerializer(serializers.ModelSerializer):
