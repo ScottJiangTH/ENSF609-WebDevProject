@@ -10,23 +10,13 @@ class Course(models.Model):
     refUrl = models.CharField(max_length=2000, null=True)
 
 class Outcome(models.Model):
-    oid = models.PositiveIntegerField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default=0)
     description = models.CharField(max_length=2000, null=False)
-    class Meta:
-        unique_together = [
-            ("oid", "course"),
-        ]
 
 class GraduateAttribute(models.Model):
-    gid = models.CharField(max_length=10, null=False)
     outcome = models.ForeignKey(Outcome, on_delete=models.CASCADE, default=0)
     description = models.CharField(max_length=2000, null=True)
     instructionLevel = models.CharField(max_length=50, null=True)
-    class Meta:
-        unique_together = [
-            ("gid", "outcome"),
-        ]
 
 class ContentCategory(models.Model):
     math1 = models.CharField(max_length=20, blank=True, null=True)
