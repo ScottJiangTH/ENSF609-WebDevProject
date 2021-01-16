@@ -21,15 +21,15 @@ ReactDOM.render(
           <Route path="/" exact component={Welcome}/>
           <Route path="/prof" exact component={ProfPage}/>
           <Route path="/admin" component={PageNotFound} />
-          <Route path="/prof/new" component={ProfFormBar}/>
+          <Route path= "/prof/new" component={PageNotFound} />
           <Route path="/prof/existing" component={ExistingForm}/>
-          <Route path="/prof/new/courseinfo" component = {CourseInfo}/> 
-          <Route path="/prof/new/learningoutcome" component = {LearningOutcome}/> 
-          <Route path="/prof/new/finalgrade" component = {FinalGrade}/> 
+          <Route path="/prof/form" component={ProfFormBar}/>
+          <Route path="/prof/form/courseinfo" component = {CourseInfo}/> 
+          <Route path="/prof/form/learningoutcome" component = {LearningOutcome}/> 
+          <Route path="/prof/form/finalgrade" component = {FinalGrade}/>
 
       </div>
     </Router>
-
   </React.StrictMode>,
   document.getElementById('root')
 );

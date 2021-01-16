@@ -7,7 +7,7 @@ function ProfPage() {
         <section className="landing">
             <div class='column'></div>
             <div class='column' >
-                <Link to="/prof/new/courseinfo">
+                <Link to="/prof/new">
                     <button class='button is-large is-fullwidth is-rounded is-link' >New Form</button>
                 </Link>
             </div>

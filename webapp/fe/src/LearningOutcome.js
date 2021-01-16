@@ -3,18 +3,18 @@ import React from 'react'
 
 // ga represents a list of GraduateAttributes that has an ID and a description
 const ga = [
-    { label: 'A1 : A knowledge base for engineering' },
-    { label: 'A2 : Problem analysis' },
-    { label: 'A3 : Investigation' },
-    { label: 'A4 : Design' },
-    { label: 'A5 : Use of engineering tools' },
-    { label: 'A6 : Individual and team work' },
-    { label: 'A7 :  Communication skills' },
-    { label: 'A8 :  Professionalism' },
-    { label: 'A9 :  Impact of engineering on society/environment' },
-    { label: 'A10 :  Ethics and equity' },
-    { label: 'A11 :  Economics and project management' },
-    { label: 'A12 :  Life-long learning' }
+    { gid: 'A1', description: 'A knowledge base for engineering' },
+    { gid: 'A2', description: 'Problem analysis' },
+    { gid: 'A3', description: 'Investigation' },
+    { gid: 'A4', description: 'Design' },
+    { gid: 'A5', description: 'Use of engineering tools' },
+    { gid: 'A6', description: 'Individual and team work' },
+    { gid: 'A7', description: 'Communication skills' },
+    { gid: 'A8', description: 'Professionalism' },
+    { gid: 'A9', description: 'Impact of engineering on society/environment' },
+    { gid: 'A10', description: 'Ethics and equity' },
+    { gid: 'A11', description: 'Economics and project management' },
+    { gid: 'A12', description: 'Life-long learning' }
 ];
 
 // il represents a list of InstructionLevel that has an ID and a description
@@ -25,15 +25,21 @@ const il = [
 ];
 
 const defaultOutcome = {
-    desc: "",
-    outGA: "A1. A knowledge base for engineering",
-    outIL: "Applied"
+    oid: -1,
+    description: "",
+    courseNumber: "ENSF 408",
+    graduateAttributes: [{
+        gid: "A1",
+        description: "A knowledge base for engineering",
+        instructionLevel: "Applied",
+        oid: -1
+    }]
 };
+
 
 export default class LearningOutcome extends React.Component {
     constructor(props) {
         super(props);
-        // this.setState({ tempoutcome: defaultOutcome });
         const initialState = this.state
     }
 
@@ -41,49 +47,132 @@ export default class LearningOutcome extends React.Component {
         deleteID: 0,
         editID: 0,
         tempoutcome: {
-            desc: "",
-            outGA: "A1. A knowledge base for engineering",
-            outIL: "Applied"
+            oid: -1,
+            description: "",
+            courseNumber: "ENSF 408",
+            graduateAttributes: 
+            [
+                {
+                    gid: "A1",
+                    description: "A knowledge base for engineering",
+                    instructionLevel: "Applied",
+                    oid: -1
+                }]
+            
         },
-        
+
         outcomes: [
             {
-                desc: "Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.",
-                outGA: "A1. A knowledge base for engineering",
-                outIL: "Applied"
+                oid: 1,
+                description: "Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.",
+                courseNumber: "ENSF 408",
+                graduateAttributes: [
+                    {
+                        gid: "A1",
+                        description: "A knowledge base for engineering",
+                        instructionLevel: "Applied",
+                        oid: 1
+                    }
+                ]
             },
             {
-                desc: "Design and develop software programs in Java.",
-                outGA: "A4. Design",
-                outIL: "Applied"
+                oid: 2,
+                description: "Design and develop software programs in Java.",
+                courseNumber: "ENSF 408",
+                graduateAttributes: [
+                    {
+                        gid: "A4",
+                        description: "Design",
+                        instructionLevel: "Applied",
+                        oid: 2
+                    }
+                ]
             },
             {
-                desc: "Define the concepts of object-oriented design, such as inheritance and polymorphism.",
-                outGA: "A2. Problem analysis",
-                outIL: "Applied"
+                oid: 3,
+                description: "Define the concepts of object-oriented design, such as inheritance and polymorphism.",
+                courseNumber: "ENSF 408",
+                graduateAttributes: [
+                    {
+                        gid: "A2",
+                        description: "Problem analysis",
+                        instructionLevel: "Applied",
+                        oid: 3
+                    }
+                ]
             },
             {
-                desc: "Apply miscellaneous programming concepts in Java, such as cloning, generic types, multi-threading, event-based programming, etc.",
-                outGA: "A5. Use of engineering tools",
-                outIL: "Applied"
+                oid: 4,
+                description: "Apply miscellaneous programming concepts in Java, such as cloning, generic types, multi-threading, event-based programming, etc.",
+                courseNumber: "ENSF 408",
+                graduateAttributes: [
+                    {
+                        gid: "A5",
+                        description: "Use of engineering tools",
+                        instructionLevel: "Applied",
+                        oid: 4
+                    }
+                ]
+            },
+            {
+                oid: 5,
+                description: "Design and develop client-server applications.",
+                courseNumber: "ENSF 408",
+                graduateAttributes: [
+                    {
+                        gid: "A4",
+                        description: "Design",
+                        instructionLevel: "Applied",
+                        oid: 5
+                    }
+                ]
+            },
+            {
+                oid: 6,
+                description: "Use databases to store and retrieve information.",
+                courseNumber: "ENSF 408",
+                graduateAttributes: [
+                    {
+                        gid: "A3",
+                        description: "Investigation",
+                        instructionLevel: "Developed",
+                        oid: 6
+                    }
+                ]
+            },
+            {
+                oid: 7,
+                description: "Use different design and development utilities and tools.",
+                courseNumber: "ENSF 408",
+                graduateAttributes: [
+                    {
+                        gid: "A5",
+                        description: "Use of engineering tools",
+                        instructionLevel: "Developed",
+                        oid: 7
+                    }
+                ]
             }
         ]
 
-
-        // category: [], // include cat, element1, element2, au
-        // section: [], // include lecture:{sectionCount, hourPerWeek, stuPerSup}, tutotial{}, lab{}
-        // labExp: [] // type, numOfLab, safetyTaught, safetyExamed
     }
 
 
     updateOutGA(event) {
-        this.setState({ tempoutcome: { ...this.state.tempoutcome, outGA: event.target.value } });
+        let desc = ga.find(({ gid }) => gid === event.target.value).description;
+        this.setState({ tempoutcome : { ...this.state.tempoutcome, 
+            graduateAttributes : [{...this.state.tempoutcome.graduateAttributes[0], description: desc , gid: event.target.value  }],
+        } });
     }
+
     updateOutIL(event) {
-        this.setState({ tempoutcome: { ...this.state.tempoutcome, outIL: event.target.value } });
+        //this.setState({ tempoutcome : { ...this.state.tempoutcome.graduateAttributes[0], instructionLevel: event.target.value } });
+        this.setState({ tempoutcome : { ...this.state.tempoutcome, 
+            graduateAttributes : [{...this.state.tempoutcome.graduateAttributes[0], instructionLevel: event.target.value }],
+        } });
     }
     updateDesc(event) {
-        this.setState({ tempoutcome: { ...this.state.tempoutcome, desc: event.target.value } });
+        this.setState({ tempoutcome: { ...this.state.tempoutcome, description: event.target.value } });
     }
     updateDeleteID(event) {
         this.setState({ deleteID: Number(event.target.value) });
@@ -93,7 +182,7 @@ export default class LearningOutcome extends React.Component {
     }
 
     handleAddOutcomeClick() {
-        if (this.state.tempoutcome.desc === "") {
+        if (this.state.tempoutcome.description === "") {
             return;
         }
         this.setState({
@@ -103,7 +192,7 @@ export default class LearningOutcome extends React.Component {
     }
 
     handleEditRowClick() {
-        if (this.state.editID.desc === -1) {
+        if (this.state.editID === -1) {
             return;
         }
         let outcs = [...this.state.outcomes];
@@ -118,7 +207,7 @@ export default class LearningOutcome extends React.Component {
     }
 
     handleDeleteRowClick() {
-        if (this.state.deleteID.desc === -1) {
+        if (this.state.deleteID === -1) {
             return;
         }
         let outcs = [...this.state.outcomes];
@@ -130,11 +219,11 @@ export default class LearningOutcome extends React.Component {
 
     renderTable1Data() {
         return this.state.outcomes.map((outcome, index) => {
-            const { desc, outGA, outIL } = outcome //destructuring
+            const { oid, description } = outcome //destructuring
             return (
-                <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{desc}</td>
+                <tr key={oid}>
+                    <td>{oid}</td>
+                    <td>{description}</td>
                 </tr>
             )
         })
@@ -154,12 +243,12 @@ export default class LearningOutcome extends React.Component {
 
     renderTable2Data() {
         return this.state.outcomes.map((outcome, index) => {
-            const { desc, outGA, outIL } = outcome //destructuring
+            const { oid, graduateAttributes } = outcome //destructuring
             return (
-                <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{outGA}</td>
-                    <td>{outIL}</td>
+                <tr key={oid}>
+                    <td>{oid}</td>
+                    <td>{graduateAttributes[0].gid + " : " + graduateAttributes[0].description}</td>
+                    <td>{graduateAttributes[0].instructionLevel}</td>
                 </tr>
             )
         })
@@ -218,7 +307,7 @@ export default class LearningOutcome extends React.Component {
                         <div class="columns">
                             <div class='column is-three-quarter'>
                                 <input class="textarea" placeholder="Pleas Input Outcome Description"
-                                    value={this.state.tempoutcome.desc}
+                                    value={this.state.tempoutcome.description}
                                     onChange={evt => this.updateDesc(evt)} >
                                 </input>
                             </div>
@@ -284,7 +373,7 @@ export default class LearningOutcome extends React.Component {
                                     <select value={this.state.tempoutcome.outGA}
                                         onChange={evt => this.updateOutGA(evt)}>
                                         {ga.map((option) => (
-                                            <option value={option.label}>{option.label}</option>))}
+                                            <option value={option.gid}>{option.gid + " : " + option.description}</option>))}
                                     </select>
                                 </div>
                             </div>

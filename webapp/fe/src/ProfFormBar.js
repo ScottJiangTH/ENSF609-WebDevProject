@@ -11,13 +11,13 @@ function ProfFormBar() {
     return (
         <nav className='ProfBar'>
             <ul className='ProfLinks'>
-                <Link style={linkStyle} to ="/prof/new/courseinfo">
+                <Link style={linkStyle} to ="/prof/form/courseinfo">
                     <li>Course Information</li>
                 </Link>
-                <Link style={linkStyle} to ="/prof/new/learningoutcome">
+                <Link style={linkStyle} to ="/prof/form/learningoutcome">
                     <li>Learning Outcome</li>
                 </Link>
-                <Link style={linkStyle} to ="/prof/new/finalgrade">
+                <Link style={linkStyle} to ="/prof/form/finalgrade">
                     <li>Final Grade</li>
                 </Link>
             </ul>

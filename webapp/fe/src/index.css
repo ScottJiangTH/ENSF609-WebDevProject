@@ -70,3 +70,10 @@ code {
   align-items: center;
   
 }
+.existing{
+  height:80vh;
+  width:75%;
+  display:flex;
+  justify-content: center;
+  
+}
