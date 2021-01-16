@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react';
 import Connect from './Connect';
+import { Link } from 'react-router-dom';
 
 const connect = new Connect();
 
@@ -28,11 +29,16 @@ export default class ExistingForm extends React.Component {
                 <tr key={course.courseNumber}>
                     <td>{course.courseNumber}: {course.courseName}</td>
                     <td>
-                        <button class='button is-link'>edit</button>
+
+                        <Link to="/prof/form/courseinfo/${course.courseNumber}">
+                            <button class='button is-link'>edit</button>
+                        </Link>
                     </td>
 
                     <td>
-                        <button class='button is-primary'>view pdf</button>
+                        <Link to="/prof/form/courseinfo/${course.courseNumber}">
+                            <button class='button is-primary'>view pdf</button>
+                        </Link>
                     </td>
                 </tr>
             )
@@ -43,7 +49,7 @@ export default class ExistingForm extends React.Component {
     renderTable() {
         return (
             <div>
-                <table class="table is-fullwidth">
+                <table class="table is-hoverable is-fullwidth">
                     <thead>
                         <tr>
                             <th>Courses</th>
