@@ -2,6 +2,7 @@ import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
 import ProfFormBar from './ProfFormBar';
+
 const initialState = {
   courseInfo: {
     courseNum: '',
