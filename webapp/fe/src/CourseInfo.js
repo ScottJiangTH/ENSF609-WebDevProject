@@ -1,5 +1,6 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
+import Connect from './Connect';
 import ProfFormBar from './ProfFormBar';
 const initialState = {
   courseInfo: {
@@ -16,11 +17,15 @@ const options = [
   { label: "1", value: 1 }, { label: "2", value: 2 }, { label: "3", value: 3 },
   { label: "4", value: 4 }, { label: "5", value: 5 }, { label: "6", value: 6 }
 ];
+
+const connect = new Connect();
+
 export default class CourseInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = initialState;
     this.handleClick = this.handleSave.bind(this);
+    this.state.courseInfo.courseNum = this.props.match.params.courseNum;
   }
 
   handleSave(event) {

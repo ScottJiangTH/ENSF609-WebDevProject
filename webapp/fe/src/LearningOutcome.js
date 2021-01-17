@@ -221,8 +221,8 @@ export default class LearningOutcome extends React.Component {
         return this.state.outcomes.map((outcome, index) => {
             const { oid, description } = outcome //destructuring
             return (
-                <tr key={oid}>
-                    <td>{oid}</td>
+                <tr key={index}>
+                    <td>{index+1}</td>
                     <td>{description}</td>
                 </tr>
             )
@@ -245,8 +245,8 @@ export default class LearningOutcome extends React.Component {
         return this.state.outcomes.map((outcome, index) => {
             const { oid, graduateAttributes } = outcome //destructuring
             return (
-                <tr key={oid}>
-                    <td>{oid}</td>
+                <tr key={index}>
+                    <td>{index+1}</td>
                     <td>{graduateAttributes[0].gid + " : " + graduateAttributes[0].description}</td>
                     <td>{graduateAttributes[0].instructionLevel}</td>
                 </tr>
