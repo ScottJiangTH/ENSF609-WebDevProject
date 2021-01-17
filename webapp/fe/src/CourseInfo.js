@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import ProfFormBar from './ProfFormBar';
+
 const initialState = {
   courseInfo: {
     courseNum: '',
