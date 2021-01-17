@@ -1,6 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
+import { Link } from 'react-router-dom';
 
 const connect = new Connect();
 const initialState = {
@@ -70,9 +71,9 @@ export default class NewForm extends React.Component {
                     </div>
                 </section>
                 <section className='columns m-6'>
-                    <div className='column'>
-                        <button className='button is-link' onClick={evt => this.handleNewForm(evt)} >Start Building Form</button>
-                    </div>
+                    <Link to={`/prof/form/courseinfo/${this.state.course.courseNumber}`} activeClassName="active">
+                        <button class='button is-link' onClick={evt => this.handleNewForm(evt)} >Start Building Form</button>
+                    </Link>
                 </section>
             </div>
         );
