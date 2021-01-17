@@ -13,6 +13,7 @@ import PageNotFound from './PageNotFound';
 import NewForm from './NewForm';
 import ExistingForm from './ExistingForm';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Preview from './Preview';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,9 +25,10 @@ ReactDOM.render(
           <Route path="/admin" component={PageNotFound} />
           <Route path= "/prof/new" component={NewForm}/>
           <Route path="/prof/existing" component={ExistingForm}/>
-          <Route path="/prof/form/courseinfo/:courseNum" component = {CourseInfo}/> 
-          <Route path="/prof/form/learningoutcome/:courseNum" component = {LearningOutcome}/> 
-          <Route path="/prof/form/finalgrade/:courseNum" component = {FinalGrade}/>
+          <Route path="/prof/form/courseinfo/:courseNumber" component = {CourseInfo}/> 
+          <Route path="/prof/form/learningoutcome/:courseNumber" component = {LearningOutcome}/> 
+          <Route path="/prof/form/finalgrade/:courseNumber" component = {FinalGrade}/>
+          <Route path="/prof/form/preview/:courseNumber" component = {Preview}/>
 
       </div>
     </Router>
