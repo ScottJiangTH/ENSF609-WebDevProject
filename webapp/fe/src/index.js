@@ -24,7 +24,6 @@ ReactDOM.render(
           <Route path="/admin" component={PageNotFound} />
           <Route path= "/prof/new" component={NewForm}/>
           <Route path="/prof/existing" component={ExistingForm}/>
-          <Route path="/prof/form" component={ProfFormBar}/>
           <Route path="/prof/form/courseinfo/:courseNum" component = {CourseInfo}/> 
           <Route path="/prof/form/learningoutcome/:courseNum" component = {LearningOutcome}/> 
           <Route path="/prof/form/finalgrade/:courseNum" component = {FinalGrade}/>

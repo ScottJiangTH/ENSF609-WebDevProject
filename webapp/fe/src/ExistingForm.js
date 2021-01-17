@@ -29,14 +29,13 @@ export default class ExistingForm extends React.Component {
                 <tr key={course.courseNumber}>
                     <td>{course.courseNumber}: {course.courseName}</td>
                     <td>
-
-                        <Link to="/prof/form/courseinfo/${course.courseNumber}">
+                        <Link to={`/prof/form/courseinfo/${course.courseNumber}`}>
                             <button class='button is-link'>edit</button>
                         </Link>
                     </td>
 
                     <td>
-                        <Link to="/prof/form/courseinfo/${course.courseNumber}">
+                        <Link to={`/print/preview/${course.courseNumber}`}>
                             <button class='button is-primary'>view pdf</button>
                         </Link>
                     </td>

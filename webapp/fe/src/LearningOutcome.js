@@ -1,5 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
+import Connect from './Connect';
+import { Link } from 'react-router-dom';
 
 // ga represents a list of GraduateAttributes that has an ID and a description
 const ga = [
@@ -24,6 +26,8 @@ const il = [
     { label: 'Developed' }
 ];
 
+const connect = new Connect();
+
 const defaultOutcome = {
     oid: -1,
     description: "",
@@ -43,6 +47,14 @@ export default class LearningOutcome extends React.Component {
         const initialState = this.state
     }
 
+    componentDidMount() {
+        var self = this;
+        connect.getCourse(this.props.match.params.courseNum).then((response) => {
+            console.log(response);
+            self.setState(response);
+        });
+    }
+
     state = {
         deleteID: 0,
         editID: 0,
@@ -50,15 +62,15 @@ export default class LearningOutcome extends React.Component {
             oid: -1,
             description: "",
             courseNumber: "ENSF 408",
-            graduateAttributes: 
-            [
-                {
-                    gid: "A1",
-                    description: "A knowledge base for engineering",
-                    instructionLevel: "Applied",
-                    oid: -1
-                }]
-            
+            graduateAttributes:
+                [
+                    {
+                        gid: "A1",
+                        description: "A knowledge base for engineering",
+                        instructionLevel: "Applied",
+                        oid: -1
+                    }]
+
         },
 
         outcomes: [
@@ -160,16 +172,22 @@ export default class LearningOutcome extends React.Component {
 
     updateOutGA(event) {
         let desc = ga.find(({ gid }) => gid === event.target.value).description;
-        this.setState({ tempoutcome : { ...this.state.tempoutcome, 
-            graduateAttributes : [{...this.state.tempoutcome.graduateAttributes[0], description: desc , gid: event.target.value  }],
-        } });
+        this.setState({
+            tempoutcome: {
+                ...this.state.tempoutcome,
+                graduateAttributes: [{ ...this.state.tempoutcome.graduateAttributes[0], description: desc, gid: event.target.value }],
+            }
+        });
     }
 
     updateOutIL(event) {
         //this.setState({ tempoutcome : { ...this.state.tempoutcome.graduateAttributes[0], instructionLevel: event.target.value } });
-        this.setState({ tempoutcome : { ...this.state.tempoutcome, 
-            graduateAttributes : [{...this.state.tempoutcome.graduateAttributes[0], instructionLevel: event.target.value }],
-        } });
+        this.setState({
+            tempoutcome: {
+                ...this.state.tempoutcome,
+                graduateAttributes: [{ ...this.state.tempoutcome.graduateAttributes[0], instructionLevel: event.target.value }],
+            }
+        });
     }
     updateDesc(event) {
         this.setState({ tempoutcome: { ...this.state.tempoutcome, description: event.target.value } });
@@ -222,7 +240,7 @@ export default class LearningOutcome extends React.Component {
             const { oid, description } = outcome //destructuring
             return (
                 <tr key={index}>
-                    <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td>{description}</td>
                 </tr>
             )
@@ -246,7 +264,7 @@ export default class LearningOutcome extends React.Component {
             const { oid, graduateAttributes } = outcome //destructuring
             return (
                 <tr key={index}>
-                    <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td>{graduateAttributes[0].gid + " : " + graduateAttributes[0].description}</td>
                     <td>{graduateAttributes[0].instructionLevel}</td>
                 </tr>
@@ -413,7 +431,6 @@ export default class LearningOutcome extends React.Component {
                                 <button class="button is-link"
                                     onClick={this.handleDeleteRowClick.bind(this)}
                                 >
-                                    {/* onClick={this.handleDeleteRowClick.bind(this)} */}
                                     Delete Row</button>
                             </div>
                         </div>
@@ -737,7 +754,10 @@ export default class LearningOutcome extends React.Component {
                         <button class='button is-link'>Clear Content</button>
                     </div>
                     <div class='column'>
-                        <button class='button is-link'>Proceed to Next Section</button>
+                        <Link to={`/prof/form/finalgrade/${this.state.courseNumber}`}>
+                            <button class='button is-link'>Proceed to Next Section</button>
+                        </Link>
+
                     </div>
                     <div class='column'></div>
                 </section>
