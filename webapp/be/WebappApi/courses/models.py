@@ -15,6 +15,7 @@ class Outcome(models.Model):
 
 class GraduateAttribute(models.Model):
     outcome = models.ForeignKey(Outcome, on_delete=models.CASCADE)
+    gid = models.CharField(max_length=20, null=True)
     description = models.CharField(max_length=2000, null=True)
     instructionLevel = models.CharField(max_length=50, null=True)
 

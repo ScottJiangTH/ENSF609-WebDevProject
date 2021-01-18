@@ -21,7 +21,8 @@ class OutcomeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Outcome
-        fields = ['description', 
+        fields = ['gid',
+                'description', 
                 'graduateAttributes',
                 ]
 
