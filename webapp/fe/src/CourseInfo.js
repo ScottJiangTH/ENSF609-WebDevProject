@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
-import { Link } from 'react-router-dom';
+import { Link , Redirect} from 'react-router-dom';
 
 
 const options = [
@@ -10,8 +10,7 @@ const options = [
 ];
 
 const connect = new Connect();
-
-const initialState = {
+var initialState = {
   courseNumber: "",
   courseName: "",
   courseDescription: "",
@@ -40,7 +39,8 @@ export default class CourseInfo extends React.Component {
 
   componentDidMount() {
     var self = this;
-    connect.getCourse(this.props.match.params.courseNum).then((response) => {
+
+    connect.getCourse(this.props.match.params.courseNumber).then((response) => {
       console.log(response);
       self.setState(response );
     });
@@ -50,11 +50,18 @@ export default class CourseInfo extends React.Component {
     if (this.state === initialState) {
       alert('No changes to be saved');
     } else {
+      connect.deleteCourse(this.state);
+      connect.createCourse(this.state);
+      initialState=this.state;
       alert(this.state.courseName + ' saved. Please proceed to next section.');
     }
   }
   handleClear(event) {
-    // this.setState(connect.getCourse(this.props.match.params.courseNum));
+    var self = this;
+    connect.getCourse(this.props.match.params.courseNumber).then((response) => {
+        console.log(response);
+        self.setState({ ...this.state, course: response });
+    });
     alert('All fields cleared.');
   }
   updateCourseNum(event) {
@@ -67,13 +74,13 @@ export default class CourseInfo extends React.Component {
     this.setState({ courseDescription: event.target.value });
   }
   updateCredit(event) {
-    this.setState({ academicCredit: event.target.value });
+    this.setState({ academicCredit: Number(event.target.value) });
   }
   updateLecture(event) {
-    this.setState({ lectureHours: event.target.value });
+    this.setState({ lectureHours: Number(event.target.value) });
   }
   updateLab(event) {
-    this.setState({ labHours: event.target.value });
+    this.setState({ labHours: Number(event.target.value) });
   }
   updateURL(event) {
     this.setState({ refUrl: event.target.value });

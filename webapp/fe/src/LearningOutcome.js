@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // ga represents a list of GraduateAttributes that has an ID and a description
 const ga = [
@@ -28,15 +28,14 @@ const il = [
 
 const connect = new Connect();
 
+var initialState = [];
+
 const defaultOutcome = {
-    oid: -1,
     description: "",
-    courseNumber: "ENSF 408",
     graduateAttributes: [{
         gid: "A1",
         description: "A knowledge base for engineering",
         instructionLevel: "Applied",
-        oid: -1
     }]
 };
 
@@ -49,9 +48,9 @@ export default class LearningOutcome extends React.Component {
 
     componentDidMount() {
         var self = this;
-        connect.getCourse(this.props.match.params.courseNum).then((response) => {
+        connect.getCourse(this.props.match.params.courseNumber).then((response) => {
             console.log(response);
-            self.setState(response);
+            self.setState({ ...this.state, course: response });
         });
     }
 
@@ -59,116 +58,132 @@ export default class LearningOutcome extends React.Component {
         deleteID: 0,
         editID: 0,
         tempoutcome: {
-            oid: -1,
             description: "",
-            courseNumber: "ENSF 408",
             graduateAttributes:
                 [
                     {
                         gid: "A1",
                         description: "A knowledge base for engineering",
                         instructionLevel: "Applied",
-                        oid: -1
                     }]
 
         },
 
-        outcomes: [
-            {
-                oid: 1,
-                description: "Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.",
-                courseNumber: "ENSF 408",
-                graduateAttributes: [
-                    {
-                        gid: "A1",
-                        description: "A knowledge base for engineering",
-                        instructionLevel: "Applied",
-                        oid: 1
-                    }
-                ]
-            },
-            {
-                oid: 2,
-                description: "Design and develop software programs in Java.",
-                courseNumber: "ENSF 408",
-                graduateAttributes: [
-                    {
-                        gid: "A4",
-                        description: "Design",
-                        instructionLevel: "Applied",
-                        oid: 2
-                    }
-                ]
-            },
-            {
-                oid: 3,
-                description: "Define the concepts of object-oriented design, such as inheritance and polymorphism.",
-                courseNumber: "ENSF 408",
-                graduateAttributes: [
-                    {
-                        gid: "A2",
-                        description: "Problem analysis",
-                        instructionLevel: "Applied",
-                        oid: 3
-                    }
-                ]
-            },
-            {
-                oid: 4,
-                description: "Apply miscellaneous programming concepts in Java, such as cloning, generic types, multi-threading, event-based programming, etc.",
-                courseNumber: "ENSF 408",
-                graduateAttributes: [
-                    {
-                        gid: "A5",
-                        description: "Use of engineering tools",
-                        instructionLevel: "Applied",
-                        oid: 4
-                    }
-                ]
-            },
-            {
-                oid: 5,
-                description: "Design and develop client-server applications.",
-                courseNumber: "ENSF 408",
-                graduateAttributes: [
-                    {
-                        gid: "A4",
-                        description: "Design",
-                        instructionLevel: "Applied",
-                        oid: 5
-                    }
-                ]
-            },
-            {
-                oid: 6,
-                description: "Use databases to store and retrieve information.",
-                courseNumber: "ENSF 408",
-                graduateAttributes: [
-                    {
-                        gid: "A3",
-                        description: "Investigation",
-                        instructionLevel: "Developed",
-                        oid: 6
-                    }
-                ]
-            },
-            {
-                oid: 7,
-                description: "Use different design and development utilities and tools.",
-                courseNumber: "ENSF 408",
-                graduateAttributes: [
-                    {
-                        gid: "A5",
-                        description: "Use of engineering tools",
-                        instructionLevel: "Developed",
-                        oid: 7
-                    }
-                ]
-            }
-        ]
+        course: {
+            outcomes: [
+                {
+                    oid: 1,
+                    description: "Have a deep understanding, and practical knowledge of object oriented analysis, design, and development.",
+                    courseNumber: "ENSF 408",
+                    graduateAttributes: [
+                        {
+                            gid: "A1",
+                            description: "A knowledge base for engineering",
+                            instructionLevel: "Applied",
+                            oid: 1
+                        }
+                    ]
+                },
+                {
+                    oid: 2,
+                    description: "Design and develop software programs in Java.",
+                    courseNumber: "ENSF 408",
+                    graduateAttributes: [
+                        {
+                            gid: "A4",
+                            description: "Design",
+                            instructionLevel: "Applied",
+                            oid: 2
+                        }
+                    ]
+                },
+                {
+                    oid: 3,
+                    description: "Define the concepts of object-oriented design, such as inheritance and polymorphism.",
+                    courseNumber: "ENSF 408",
+                    graduateAttributes: [
+                        {
+                            gid: "A2",
+                            description: "Problem analysis",
+                            instructionLevel: "Applied",
+                            oid: 3
+                        }
+                    ]
+                },
+                {
+                    oid: 4,
+                    description: "Apply miscellaneous programming concepts in Java, such as cloning, generic types, multi-threading, event-based programming, etc.",
+                    courseNumber: "ENSF 408",
+                    graduateAttributes: [
+                        {
+                            gid: "A5",
+                            description: "Use of engineering tools",
+                            instructionLevel: "Applied",
+                            oid: 4
+                        }
+                    ]
+                },
+                {
+                    oid: 5,
+                    description: "Design and develop client-server applications.",
+                    courseNumber: "ENSF 408",
+                    graduateAttributes: [
+                        {
+                            gid: "A4",
+                            description: "Design",
+                            instructionLevel: "Applied",
+                            oid: 5
+                        }
+                    ]
+                },
+                {
+                    oid: 6,
+                    description: "Use databases to store and retrieve information.",
+                    courseNumber: "ENSF 408",
+                    graduateAttributes: [
+                        {
+                            gid: "A3",
+                            description: "Investigation",
+                            instructionLevel: "Developed",
+                            oid: 6
+                        }
+                    ]
+                },
+                {
+                    oid: 7,
+                    description: "Use different design and development utilities and tools.",
+                    courseNumber: "ENSF 408",
+                    graduateAttributes: [
+                        {
+                            gid: "A5",
+                            description: "Use of engineering tools",
+                            instructionLevel: "Developed",
+                            oid: 7
+                        }
+                    ]
+                }
+            ]
+        }
 
     }
+    
+    handleSave(event) {
+        if (this.state === initialState) {
+            alert('No changes to be saved');
+        } else {
 
+            alert('All changes saved. Please proceed to next section.');
+        }
+    }
+
+    handleClear(event) {
+        var self = this;
+        connect.getCourse(this.props.match.params.courseNumber).then((response) => {
+            console.log(response);
+            self.setState({ ...this.state, course: response });
+        });
+        alert('All fields cleared.');
+      }
 
     updateOutGA(event) {
         let desc = ga.find(({ gid }) => gid === event.target.value).description;
@@ -205,7 +220,10 @@ export default class LearningOutcome extends React.Component {
         }
         this.setState({
             tempoutcome: defaultOutcome,
-            outcomes: [...this.state.outcomes, this.state.tempoutcome]
+            course: {
+                ...this.state.course,
+                outcomes: [...this.state.course.outcomes, this.state.tempoutcome]
+            }
         });
     }
 
@@ -213,30 +231,37 @@ export default class LearningOutcome extends React.Component {
         if (this.state.editID === -1) {
             return;
         }
-        let outcs = [...this.state.outcomes];
+        let outcs = this.state.course.outcomes;
         let outc = { ...outcs[this.state.editID] }
-        outc.outGA = this.state.tempoutcome.outGA
-        outc.outIL = this.state.tempoutcome.outIL
+        outc.graduateAttributes = this.state.tempoutcome.graduateAttributes;
         outcs[this.state.editID] = outc
 
         this.setState({
-            outcomes: outcs
+            tempoutcome: defaultOutcome,
+            course: {
+                ...this.state.course,
+                outcomes: outcs
+            }
         });
+        console.log(this.state)
     }
 
     handleDeleteRowClick() {
         if (this.state.deleteID === -1) {
             return;
         }
-        let outcs = [...this.state.outcomes];
+        let outcs = [...this.state.course.outcomes];
         outcs.splice(this.state.deleteID, 1)
         this.setState({
-            outcomes: outcs
+            course: {
+                ...this.state.course,
+                outcomes: outcs
+            }
         });
     }
 
     renderTable1Data() {
-        return this.state.outcomes.map((outcome, index) => {
+        return this.state.course.outcomes.map((outcome, index) => {
             const { oid, description } = outcome //destructuring
             return (
                 <tr key={index}>
@@ -260,13 +285,12 @@ export default class LearningOutcome extends React.Component {
     }
 
     renderTable2Data() {
-        return this.state.outcomes.map((outcome, index) => {
-            const { oid, graduateAttributes } = outcome //destructuring
+        return this.state.course.outcomes.map((outcome, index) => {
             return (
                 <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{graduateAttributes[0].gid + " : " + graduateAttributes[0].description}</td>
-                    <td>{graduateAttributes[0].instructionLevel}</td>
+                    <td>{outcome.graduateAttributes[0].gid + " : " + outcome.graduateAttributes[0].description}</td>
+                    <td>{outcome.graduateAttributes[0].instructionLevel}</td>
                 </tr>
             )
         })
@@ -345,7 +369,7 @@ export default class LearningOutcome extends React.Component {
                                 <div class="select is-small">
                                     <select value={this.state.deleteID}
                                         onChange={evt => this.updateDeleteID(evt)}>
-                                        {this.state.outcomes.map((outcome, index) => (
+                                        {this.state.course.outcomes.map((outcome, index) => (
                                             <option value={index}>{index + 1}</option>))}
                                     </select>
                                 </div>
@@ -380,7 +404,7 @@ export default class LearningOutcome extends React.Component {
                                 <div class="select is-small">
                                     <select value={this.state.editID}
                                         onChange={evt => this.updateEditID(evt)}>
-                                        {this.state.outcomes.map((outcome, index) => (
+                                        {this.state.course.outcomes.map((outcome, index) => (
                                             <option value={index}>{index + 1}</option>))}
                                     </select>
                                 </div>
@@ -421,7 +445,7 @@ export default class LearningOutcome extends React.Component {
                                 <div class="select is-small">
                                     <select value={this.state.deleteID}
                                         onChange={evt => this.updateDeleteID(evt)}>
-                                        {this.state.outcomes.map((outcome, index) => (
+                                        {this.state.course.outcomes.map((outcome, index) => (
                                             <option value={index}>{index + 1}</option>))}
                                     </select>
                                 </div>
@@ -748,13 +772,13 @@ export default class LearningOutcome extends React.Component {
                 <section class='columns m-6'>
                     <div class='column'></div>
                     <div class='column'>
-                        <button class='button is-link'>Save Changes</button>
+                        <button class='button is-link' onClick={evt => this.handleSave(evt)} >Save Changes</button>
                     </div>
                     <div class='column'>
-                        <button class='button is-link'>Clear Content</button>
+                        <button class='button is-link'onClick={evt => this.handleClear(evt)} >Clear Content</button>
                     </div>
                     <div class='column'>
-                        <Link to={`/prof/form/finalgrade/${this.state.courseNumber}`}>
+                        <Link to={`/prof/form/finalgrade/${this.props.match.params.courseNumber}`}>
                             <button class='button is-link'>Proceed to Next Section</button>
                         </Link>
 
