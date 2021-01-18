@@ -28,7 +28,7 @@ ReactDOM.render(
           <Route path="/prof/form/courseinfo/:courseNumber" component = {CourseInfo}/> 
           <Route path="/prof/form/learningoutcome/:courseNumber" component = {LearningOutcome}/> 
           <Route path="/prof/form/finalgrade/:courseNumber" component = {FinalGrade}/>
-          <Route path="/prof/form/preview/:courseNumber" component = {Preview}/>
+          <Route path="/print/preview/:courseNumber" component = {Preview}/>
 
       </div>
     </Router>
