@@ -12,8 +12,20 @@ const initialState = {
         contentCategory: [],
         sections: [],
         labExperience: [],
-        finalGrade: [],
-        letterGrade: [],
+        finalGrade: [{
+                assignmentsOutcomes: '',
+                projectOutcomes: '',
+                midtermOutcomes: '',
+                finalOutcomes: '',
+                assignmentsWeight: 25,
+                projectWeight: 25,
+                midtermWeight: 25,
+                finalWeight: 25 
+            }],
+        letterGrade: [{
+            apLow: 95, aLow: 90, amLow: 85, bpLow: 80, bLow: 75, bmLow: 70, cpLow: 65, cLow: 60, cmLow: 56, dpLow: 53, dLow: 50, fLow: 0,
+            apHigh: 100, aHigh: 95, amHigh: 90, bpHigh: 85, bHigh: 80, bmHigh: 75, cpHigh: 70, cHigh: 65, cmHigh: 60, dpHigh: 56, dHigh: 53, fHigh: 50
+        }],
     }
 };
 
@@ -25,16 +37,16 @@ export default class NewForm extends React.Component {
     }
 
     updateCourseNumber(event) {
-        this.setState({ course: {...this.state.course, courseNumber: event.target.value }});
+        this.setState({ course: { ...this.state.course, courseNumber: event.target.value } });
     }
     updateCourseName(event) {
-        this.setState({ course: {...this.state.course, courseName: event.target.value }});
+        this.setState({ course: { ...this.state.course, courseName: event.target.value } });
     }
 
     handleNewForm(event) {
         connect.createCourse(this.state.course).then((response) => {
             console.log(response);
-            alert("The course " + response.data.courseNumber + " " + this.state.course.courseName +" is created.");
+            alert("The course " + response.data.courseNumber + " " + this.state.course.courseName + " is created.");
         });
     }
 
