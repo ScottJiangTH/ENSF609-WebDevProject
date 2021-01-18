@@ -15,6 +15,12 @@ export default class Connect{
         const url = `${API_URL}/api/courses`;
         return axios.post(url,course);
     }
+
+    updateCourse(course){
+        const url = `${API_URL}/api/courses`;
+        return axios.put(url,course);
+    }
+
     deleteCourse(course){
         const url = `${API_URL}/api/courses/${course.courseNumber}`;
         return axios.delete(url);

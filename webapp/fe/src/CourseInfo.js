@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
-import { Link , Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 const options = [
@@ -11,14 +11,15 @@ const options = [
 
 const connect = new Connect();
 var initialState = {
-  courseNumber: "",
-  courseName: "",
-  courseDescription: "",
-  academicCredit: 3,
-  lectureHours: 3,
-  labHours: 2,
-  refUrl: ""
-
+  course: {
+    courseNumber: "",
+    courseName: "",
+    courseDescription: "",
+    academicCredit: 3,
+    lectureHours: 3,
+    labHours: 2,
+    refUrl: ""
+  }
 };
 
 export default class CourseInfo extends React.Component {
@@ -28,13 +29,15 @@ export default class CourseInfo extends React.Component {
   }
 
   state = {
-    courseNumber: "",
-    courseName: "",
-    courseDescription: "",
-    academicCredit: 3,
-    lectureHours: 3,
-    labHours: 2,
-    refUrl: ""
+    course: {
+      courseNumber: "",
+      courseName: "",
+      courseDescription: "",
+      academicCredit: 3,
+      lectureHours: 3,
+      labHours: 2,
+      refUrl: ""
+    }
   }
 
   componentDidMount() {
@@ -42,7 +45,7 @@ export default class CourseInfo extends React.Component {
 
     connect.getCourse(this.props.match.params.courseNumber).then((response) => {
       console.log(response);
-      self.setState(response );
+      self.setState({ ...this.state, course: response });
     });
   }
 
@@ -50,17 +53,17 @@ export default class CourseInfo extends React.Component {
     if (this.state === initialState) {
       alert('No changes to be saved');
     } else {
-      connect.deleteCourse(this.state);
-      connect.createCourse(this.state);
-      initialState=this.state;
+      connect.deleteCourse(this.state.course);
+      connect.createCourse(this.state.course);
+      initialState = this.state;
       alert(this.state.courseName + ' saved. Please proceed to next section.');
     }
   }
   handleClear(event) {
     var self = this;
     connect.getCourse(this.props.match.params.courseNumber).then((response) => {
-        console.log(response);
-        self.setState({ ...this.state, course: response });
+      console.log(response);
+      self.setState({ ...this.state, course: response });
     });
     alert('All fields cleared.');
   }
