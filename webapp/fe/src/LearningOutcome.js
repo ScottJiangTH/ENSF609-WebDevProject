@@ -170,23 +170,29 @@ export default class LearningOutcome extends React.Component {
     
     handleSave(event) {
         if (this.state === initialState) {
-            alert('No changes to be saved');
+          alert('No changes to be saved');
         } else {
-            initialState=this.state;
-            connect.updateCourse(this.state.course);
-            alert('All changes saved. Please proceed to next section.');
+          connect.updateCourse(this.state.course);
+          initialState = this.state;
+          alert(this.state.course.courseName + ' saved. Please proceed to next section.');
         }
-    }
-
-    handleClear(event) {
+      }
+      handleClear(event) {
         var self = this;
         connect.getCourse(this.props.match.params.courseNumber).then((response) => {
-            console.log(response);
-            self.setState({ ...this.state, course: response });
+          console.log(response);
+          self.setState({ ...this.state, course: response });
         });
         alert('All fields cleared.');
       }
-
+      updateCourseNum(event) {
+        this.setState({
+          ...this.state, course: {
+            ...this.state.course,
+            courseNumber: event.target.value
+          }
+        });
+      }
     updateOutGA(event) {
         let desc = ga.find(({ gid }) => gid === event.target.value).description;
         this.setState({

@@ -17,7 +17,7 @@ export default class Connect{
     }
 
     updateCourse(course){
-        const url = `${API_URL}/api/courses`;
+        const url = `${API_URL}/api/courses/${course.courseNumber}`;
         return axios.put(url,course);
     }
 

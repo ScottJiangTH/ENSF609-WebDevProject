@@ -8,10 +8,10 @@ var initialState = {
     totalWeight: 100,
     course: {
         finalGrade: [{
-            assignmentsOutcome: '1-7',
-            projectOutcome: '1-7',
-            midtermOutcome: '1-7',
-            finalOutcome: '1-7',
+            assignmentsOutcomes: '1-7',
+            projectOutcomes: '1-7',
+            midtermOutcomes: '1-7',
+            finalOutcomes: '1-7',
             assignmentsWeight: 25,
             projectWeight: 25,
             midtermWeight: 25,
@@ -38,10 +38,10 @@ export default class FinalGrade extends React.Component {
         totalWeight: 100,
         course: {
             finalGrade: [{
-                assignmentsOutcome: '1-7',
-                projectOutcome: '1-7',
-                midtermOutcome: '1-7',
-                finalOutcome: '1-7',
+                assignmentsOutcomes: '1-7',
+                projectOutcomes: '1-7',
+                midtermOutcomes: '1-7',
+                finalOutcomes: '1-7',
                 assignmentsWeight: 25,
                 projectWeight: 25,
                 midtermWeight: 25,
@@ -64,16 +64,51 @@ export default class FinalGrade extends React.Component {
         });
     }
 
-    handleFinalGradeChange(event) {
+    handleSave(event) {
+        if (this.state === initialState) {
+            alert('No changes to be saved');
+        } else {
+            console.log(this.state)
+            connect.updateCourse(this.state.course);
+            initialState = this.state;
+            alert(this.state.course.courseName + ' saved. Please proceed to next section.');
+        }
+    }
+    handleClear(event) {
+        var self = this;
+        connect.getCourse(this.props.match.params.courseNumber).then((response) => {
+            console.log(response);
+            self.setState({ ...this.state, course: response });
+        });
+        alert('All changes cleared.');
+    }
+    updateCourseNum(event) {
+        this.setState({
+            ...this.state, course: {
+                ...this.state.course,
+                courseNumber: event.target.value
+            }
+        });
+    }
+
+    handleFinalGradeChange(event, isNum) {
         const target = event.target;
         var value = target.value;
         const name = target.name;
-        if (Number(value)){
-            value=Number(value)
+        var total = 0;
+        if (isNum) {
+            value = parseInt(value)
+            if (isNaN(value)) { value = 0 };
+            console.log(this.state.course.finalGrade[0][name]);
+            total = this.state.totalWeight - this.state.course.finalGrade[0][name] + value
+            if (total > 100) { alert("Warning Weight Total is Over 100%"); }
+        } else {
+            total = this.state.totalWeight;
         }
 
         this.setState({
             ...this.state,
+            totalWeight: total,
             course: {
                 ...this.state.course,
                 finalGrade: [{
@@ -83,8 +118,6 @@ export default class FinalGrade extends React.Component {
             }
         });
     }
-
-    
 
     handleLetterGradeChange(event) {
         const target = event.target;
@@ -102,23 +135,6 @@ export default class FinalGrade extends React.Component {
                 }]
             }
         });
-    }
-
-    handleSave(event) {
-        if (this.state === initialState) {
-            alert('No changes to be saved');
-        } else {
-
-            alert('All changes saved. Please proceed to next section.');
-        }
-    }
-    handleClear(event) {
-        var self = this;
-        connect.getCourse(this.props.match.params.courseNumber).then((response) => {
-            console.log(response);
-            self.setState({ ...this.state, response });
-        });
-        alert('All changes cleared.');
     }
 
     render() {
@@ -156,14 +172,14 @@ export default class FinalGrade extends React.Component {
                             <label class="label">Assignments</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" name='assignments'
-                                value={this.state.course.finalGrade[0].assignmentsOutcome}
-                                onChange={event => this.handleFinalGradeChange(event)}></input>
+                            <input class="input" type="text" name='assignmentsOutcomes'
+                                value={this.state.course.finalGrade[0].assignmentsOutcomes}
+                                onChange={event => this.handleFinalGradeChange(event, false)}></input>
                         </div>
                         <div class="column">
-                            <input class="number" type="text" name='assignments'
+                            <input class="number" type="text" name='assignmentsWeight'
                                 value={this.state.course.finalGrade[0].assignmentsWeight}
-                                onChange={event => this.handleFinalGradeChange(event)}></input>
+                                onChange={event => this.handleFinalGradeChange(event, true)}></input>
                         </div>
                     </div>
                     <div class="columns">
@@ -171,14 +187,14 @@ export default class FinalGrade extends React.Component {
                             <label class="label">Project</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" name='project'
-                                value={this.state.course.finalGrade[0].projectOutcome}
-                                onChange={event => this.handleFinalGradeChange(event)}></input>
+                            <input class="input" type="text" name='projectOutcomes'
+                                value={this.state.course.finalGrade[0].projectOutcomes}
+                                onChange={event => this.handleFinalGradeChange(event, false)}></input>
                         </div>
                         <div class="column">
-                            <input class="number" type="text" name='project'
+                            <input class="number" type="text" name='projectWeight'
                                 value={this.state.course.finalGrade[0].projectWeight}
-                                onChange={event => this.handleFinalGradeChange(event)}></input>
+                                onChange={event => this.handleFinalGradeChange(event, true)}></input>
                         </div>
                     </div>
                     <div class="columns">
@@ -186,14 +202,14 @@ export default class FinalGrade extends React.Component {
                             <label class="label">Midterm Examination</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" name='midterm'
-                                value={this.state.course.finalGrade[0].midtermOutcome}
-                                onChange={event => this.handleFinalGradeChange(event)}></input>
+                            <input class="input" type="text" name='midtermOutcomes'
+                                value={this.state.course.finalGrade[0].midtermOutcomes}
+                                onChange={event => this.handleFinalGradeChange(event, false)}></input>
                         </div>
                         <div class="column">
-                            <input class="number" type="percentage" name='midterm'
+                            <input class="number" type="percentage" name='midtermWeight'
                                 value={this.state.course.finalGrade[0].midtermWeight}
-                                onChange={event => this.handleFinalGradeChange(event)}></input>
+                                onChange={event => this.handleFinalGradeChange(event, true)}></input>
                         </div>
                     </div>
                     <div class="columns">
@@ -201,17 +217,17 @@ export default class FinalGrade extends React.Component {
                             <label class="label">Final Examination</label>
                         </div>
                         <div class="column">
-                            <input class="input" type="text" name='final'
-                                value={this.state.course.finalGrade[0].finalOutcome}
-                                onChange={event => this.handleFinalGradeChange(event)}></input>
+                            <input class="input" type="text" name='finalOutcomes'
+                                value={this.state.course.finalGrade[0].finalOutcomes}
+                                onChange={event => this.handleFinalGradeChange(event, false)}></input>
                         </div>
                         <div class="column">
-                            <input class="number" type="percentage" name='final'
+                            <input class="number" type="percentage" name='finalWeight'
                                 value={this.state.course.finalGrade[0].finalWeight}
-                                onChange={event => this.handleFinalGradeChange(event)}></input>
+                                onChange={event => this.handleFinalGradeChange(event, true)}></input>
                         </div>
                     </div>
-                    <div class='columns'>
+                    {/* <div class='columns'>
                         <div class='column'></div>
                         <div class='column'>
                             <button class='button is-link'>Add Grade Component</button>
@@ -220,7 +236,7 @@ export default class FinalGrade extends React.Component {
                             <button class='button is-link'>Delete Grade Component</button>
                         </div>
                         <div class='column'></div>
-                    </div>
+                    </div> */}
                     <div class="columns">
                         <div class="column"></div>
                         <div class="column has-text-right">
@@ -229,7 +245,8 @@ export default class FinalGrade extends React.Component {
                         <div class="column">
                             <input class="number" type="percentage"
                                 placeholder="%" disabled={true}
-                                value={this.state.totalWeight}></input>
+                                value={this.state.totalWeight}>
+                            </input>
                         </div>
                     </div>
                 </section>
@@ -263,7 +280,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='ap'
+                                    <input class="number" name='apLow'
                                         value={this.state.course.letterGrade[0].apLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
 
@@ -273,7 +290,7 @@ export default class FinalGrade extends React.Component {
                                     {'T <='}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='ap' disabled={true}
+                                    <input class="number" name='apHigh' disabled={true}
                                         value={this.state.course.letterGrade[0].apHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -288,7 +305,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='a'
+                                    <input class="number" name='aLow'
                                         value={this.state.course.letterGrade[0].aLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -297,7 +314,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='a'
+                                    <input class="number" name='aHigh'
                                         value={this.state.course.letterGrade[0].aHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -312,7 +329,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='am'
+                                    <input class="number" name='amLow'
                                         value={this.state.course.letterGrade[0].amLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -321,7 +338,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='am'
+                                    <input class="number" name='amHigh'
                                         value={this.state.course.letterGrade[0].amHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -336,7 +353,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='bp'
+                                    <input class="number" name='bpLow'
                                         value={this.state.course.letterGrade[0].bpLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -345,7 +362,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='bp'
+                                    <input class="number" name='bpHigh'
                                         value={this.state.course.letterGrade[0].bpHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -360,7 +377,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='b'
+                                    <input class="number" name='bLow'
                                         value={this.state.course.letterGrade[0].bLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -369,7 +386,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='b'
+                                    <input class="number" name='bHigh'
                                         value={this.state.course.letterGrade[0].bHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -384,7 +401,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='bm'
+                                    <input class="number" name='bmLow'
                                         value={this.state.course.letterGrade[0].bmLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -393,7 +410,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='bm'
+                                    <input class="number" name='bmHigh'
                                         value={this.state.course.letterGrade[0].bmHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -408,7 +425,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='cp'
+                                    <input class="number" name='cpLow'
                                         value={this.state.course.letterGrade[0].cpLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -417,7 +434,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='cp'
+                                    <input class="number" name='cpHigh'
                                         value={this.state.course.letterGrade[0].cpHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -432,7 +449,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='c'
+                                    <input class="number" name='cLow'
                                         value={this.state.course.letterGrade[0].cLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -441,7 +458,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='c'
+                                    <input class="number" name='cHigh'
                                         value={this.state.course.letterGrade[0].cHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -456,7 +473,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='cm'
+                                    <input class="number" name='cmLow'
                                         value={this.state.course.letterGrade[0].cmLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -465,7 +482,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='cm'
+                                    <input class="number" name='cmHigh'
                                         value={this.state.course.letterGrade[0].cmHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -480,7 +497,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='dp'
+                                    <input class="number" name='dpLow'
                                         value={this.state.course.letterGrade[0].dpLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -489,7 +506,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='dp'
+                                    <input class="number" name='dpHigh'
                                         value={this.state.course.letterGrade[0].dpHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -504,7 +521,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='d'
+                                    <input class="number" name='dLow'
                                         value={this.state.course.letterGrade[0].dLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -513,7 +530,7 @@ export default class FinalGrade extends React.Component {
                                     {'<= T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='d'
+                                    <input class="number" name='dHigh'
                                         value={this.state.course.letterGrade[0].dHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -528,7 +545,7 @@ export default class FinalGrade extends React.Component {
                         <div class="column is-two-third">
                             <div class='columns'>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='f' disabled={true}
+                                    <input class="number" name='fLow' disabled={true}
                                         value={this.state.course.letterGrade[0].fLow}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
@@ -537,7 +554,7 @@ export default class FinalGrade extends React.Component {
                                     {'   T <'}
                                 </div>
                                 <div class='column is-two-fifth'>
-                                    <input class="number" name='f'
+                                    <input class="number" name='fHigh'
                                         value={this.state.course.letterGrade[0].fHigh}
                                         onChange={event => this.handleLetterGradeChange(event)}>
                                     </input>
