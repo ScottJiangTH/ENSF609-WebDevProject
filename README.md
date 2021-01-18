@@ -22,3 +22,7 @@ https://lucid.app/lucidchart/invitations/accept/aff3c9a7-a178-4e08-9b43-20a7944f
 pip install djangorestframework  
 pip install django-cors-headers  
 pip install django-composite-foreignkey  
+
+## Frontend development Note
+### 3rd Party Library Installed
+yarn add @react-pdf/renderer
