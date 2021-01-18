@@ -53,10 +53,9 @@ export default class CourseInfo extends React.Component {
     if (this.state === initialState) {
       alert('No changes to be saved');
     } else {
-      connect.deleteCourse(this.state.course);
-      connect.createCourse(this.state.course);
+      connect.updateCourse(this.state.course);
       initialState = this.state;
-      alert(this.state.courseName + ' saved. Please proceed to next section.');
+      alert(this.state.course.courseName + ' saved. Please proceed to next section.');
     }
   }
   handleClear(event) {
@@ -68,25 +67,57 @@ export default class CourseInfo extends React.Component {
     alert('All fields cleared.');
   }
   updateCourseNum(event) {
-    this.setState({ courseNumber: event.target.value });
+    this.setState({
+      ...this.state, course: {
+        ...this.state.course,
+        courseNumber: event.target.value
+      }
+    });
   }
   updateCourseName(event) {
-    this.setState({ courseName: event.target.value });
+    this.setState({
+      ...this.state, course: {
+        ...this.state.course,
+        courseName: event.target.value
+      }
+    });
   }
   updateDescription(event) {
-    this.setState({ courseDescription: event.target.value });
+    this.setState({
+      ...this.state, course: {
+        ...this.state.course,
+        courseDescription: event.target.value
+      }
+    });
   }
   updateCredit(event) {
-    this.setState({ academicCredit: Number(event.target.value) });
+    this.setState({
+      ...this.state, course: {
+        ...this.state.course,
+        academicCredit: Number(event.target.value)
+      }
+    });
   }
   updateLecture(event) {
-    this.setState({ lectureHours: Number(event.target.value) });
+    this.setState({
+      ...this.state, course: {
+        ...this.state.course, lectureHours: Number(event.target.value)
+      }
+    });
   }
   updateLab(event) {
-    this.setState({ labHours: Number(event.target.value) });
+    this.setState({
+      ...this.state, course: {
+        ...this.state.course, labHours: Number(event.target.value)
+      }
+    });
   }
   updateURL(event) {
-    this.setState({ refUrl: event.target.value });
+    this.setState({
+      ...this.state, course: {
+        ...this.state.course, refUrl: event.target.value
+      }
+    });
   }
   render() {
     return (
@@ -110,27 +141,27 @@ export default class CourseInfo extends React.Component {
           <div class="control">
             <label class="label">Course Number</label>
             <input class="input" type="text" disabled placeholder="e.g. ENSF 409"
-              value={this.state.courseNumber}
+              value={this.state.course.courseNumber}
               onChange={evt => this.updateCourseNum(evt)}></input>
           </div>
           <div class="control">
             <label class="label">Course Name</label>
             <input class="input" type="text" disabled
               placeholder="e.g. Principles of Software Development"
-              value={this.state.courseName}
+              value={this.state.course.courseName}
               onChange={evt => this.updateCourseName(evt)}></input>
           </div>
           <div class="control">
             <label class="label">Course Description</label>
             <textarea class="textarea"
               placeholder="A brief Description of the Course"
-              value={this.state.courseDescription}
+              value={this.state.course.courseDescription}
               onChange={evt => this.updateDescription(evt)}></textarea>
           </div>
           <div class="control">
             <label class="label">Academic Credit</label>
             <div class="select is-small">
-              <select value={this.state.courseCredit}
+              <select value={this.state.course.courseCredit}
                 onChange={evt => this.updateCredit(evt)}>
                 {options.map((option) => (
                   <option value={option.value}>{option.label}</option>))}
@@ -141,14 +172,14 @@ export default class CourseInfo extends React.Component {
             <label class="label">Course Hours</label>
             <div class='columns'>
               <div class='column'>
-                {this.state.academicCredit + ' unit; H (' +
-                  this.state.lectureHours + '-' +
-                  this.state.labHours + ')'}
+                {this.state.course.academicCredit + ' unit; H (' +
+                  this.state.course.lectureHours + '-' +
+                  this.state.course.labHours + ')'}
               </div>
               <div class='column has-text-right'><label class="label-6">Lecture Hours</label></div>
               <div class='column'>
                 <div class="select is-small">
-                  <select value={this.state.lectureHours}
+                  <select value={this.state.course.lectureHours}
                     onChange={evt => this.updateLecture(evt)}>
                     {options.map((option) => (
                       <option value={option.value}>{option.label}</option>))}
@@ -158,7 +189,7 @@ export default class CourseInfo extends React.Component {
               <div class='column has-text-right'><label class="label-6">Lab Hours</label></div>
               <div class='column'>
                 <div class="select is-small">
-                  <select value={this.state.labHours}
+                  <select value={this.state.course.labHours}
                     onChange={evt => this.updateLab(evt)}>
                     {options.map((option) => (
                       <option value={option.value}>{option.label}</option>))}
@@ -171,7 +202,7 @@ export default class CourseInfo extends React.Component {
             <label class="label">Calendar Reference</label>
             <input class="input" type="text"
               placeholder="e.g. http://www.ucalgary.ca/pubs/calendar/current/software-engineering-for-engineers.html#38252"
-              value={this.state.refUrl}
+              value={this.state.course.refUrl}
               onChange={evt => this.updateURL(evt)}></input>
           </div>
         </section>
@@ -184,7 +215,7 @@ export default class CourseInfo extends React.Component {
             <button class='button is-link' onClick={evt => this.handleClear(evt)}>Clear Content</button>
           </div>
           <div class='column'>
-            <Link to={`/prof/form/learningoutcome/${this.state.courseNumber}`}>
+            <Link to={`/prof/form/learningoutcome/${this.state.course.courseNumber}`}>
               <button class='button is-link'> Next Section </button>
             </Link>
           </div>

@@ -43,7 +43,7 @@ const defaultOutcome = {
 export default class LearningOutcome extends React.Component {
     constructor(props) {
         super(props);
-        const initialState = this.state
+        
     }
 
     componentDidMount() {
@@ -51,6 +51,7 @@ export default class LearningOutcome extends React.Component {
         connect.getCourse(this.props.match.params.courseNumber).then((response) => {
             console.log(response);
             self.setState({ ...this.state, course: response });
+            initialState=this.state;
         });
     }
 
@@ -171,7 +172,8 @@ export default class LearningOutcome extends React.Component {
         if (this.state === initialState) {
             alert('No changes to be saved');
         } else {
-
+            initialState=this.state;
+            connect.updateCourse(this.state.course);
             alert('All changes saved. Please proceed to next section.');
         }
     }

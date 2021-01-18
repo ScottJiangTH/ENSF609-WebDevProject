@@ -89,7 +89,7 @@ export default class FinalGrade extends React.Component {
     handleLetterGradeChange(event) {
         const target = event.target;
         const name = target.name;
-        var value = Number(target.value);
+        var value = parseInt(target.value);
         if (isNaN(value)) { value = 0 };
 
         this.setState({
@@ -98,7 +98,7 @@ export default class FinalGrade extends React.Component {
                 ...this.state.course,
                 letterGrade: [{
                     ...this.state.course.letterGrade[0],
-                    [name]: Number(value)
+                    [name]: value
                 }]
             }
         });

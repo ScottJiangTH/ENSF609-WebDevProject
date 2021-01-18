@@ -12,7 +12,9 @@ class GraduateAttributeSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = GraduateAttribute
-        fields = ['description', 
+        fields = [
+                'gid',
+                'description', 
                 'instructionLevel', 
                 ]
 
@@ -21,7 +23,7 @@ class OutcomeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Outcome
-        fields = ['gid',
+        fields = [
                 'description', 
                 'graduateAttributes',
                 ]
