@@ -19,10 +19,26 @@ Project management files are stored with the structure:
 ### Relational Data Scheme
 https://lucid.app/lucidchart/invitations/accept/aff3c9a7-a178-4e08-9b43-20a7944f57a7
 ### 3rd Party Library Installed
+pip install django
 pip install djangorestframework  
 pip install django-cors-headers  
 pip install django-composite-foreignkey  
+### Steps to Run Backend
+- cd into ENSF609-WebDevProject folder
+- start virtual env
+  - command on Mac: source bin/activate
+  - command on Windows: .\env\Scripts\activate
+- cd into webapp/be/WebappApi
+- python manage.py makemigrations
+- python manage.py migrate
+- python manage.py createsuperuser
+  - Only set user and password, omit setting other fields
+- python manage.py runserver
+Now the backend should be fully functional at http://127.0.0.1:8000/admin
 
 ## Frontend development Note
 ### 3rd Party Library Installed
 yarn add @react-pdf/renderer
+### Steps to Run Frontend
+- cd into ENSF609-WebDevProject/webapp/fe
+- yarn start
