@@ -1,8 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
-import { Link, Redirect } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 const options = [
   { label: "1", value: 1 }, { label: "2", value: 2 }, { label: "3", value: 3 },

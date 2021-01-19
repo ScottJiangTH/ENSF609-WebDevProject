@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // ga represents a list of GraduateAttributes that has an ID and a description
 const ga = [
@@ -270,7 +270,7 @@ export default class LearningOutcome extends React.Component {
 
     renderTable1Data() {
         return this.state.course.outcomes.map((outcome, index) => {
-            const { oid, description } = outcome //destructuring
+            const { description } = outcome //destructuring
             return (
                 <tr key={index}>
                     <td>{index + 1}</td>

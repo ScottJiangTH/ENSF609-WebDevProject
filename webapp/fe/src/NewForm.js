@@ -13,10 +13,10 @@ const initialState = {
         sections: [],
         labExperience: [],
         finalGrade: [{
-                assignmentsOutcomes: '',
-                projectOutcomes: '',
-                midtermOutcomes: '',
-                finalOutcomes: '',
+                assignmentsOutcomes: '0',
+                projectOutcomes: '0',
+                midtermOutcomes: '0',
+                finalOutcomes: '0',
                 assignmentsWeight: 25,
                 projectWeight: 25,
                 midtermWeight: 25,
@@ -25,7 +25,7 @@ const initialState = {
         letterGrade: [{
             apLow: 95, aLow: 90, amLow: 85, bpLow: 80, bLow: 75, bmLow: 70, cpLow: 65, cLow: 60, cmLow: 56, dpLow: 53, dLow: 50, fLow: 0,
             apHigh: 100, aHigh: 95, amHigh: 90, bpHigh: 85, bHigh: 80, bmHigh: 75, cpHigh: 70, cHigh: 65, cmHigh: 60, dpHigh: 56, dHigh: 53, fHigh: 50
-        }],
+        }]
     }
 };
 

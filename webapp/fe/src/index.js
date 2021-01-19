@@ -6,13 +6,12 @@ import LearningOutcome from './LearningOutcome';
 import FinalGrade from './FinalGrade';
 import reportWebVitals from './reportWebVitals';
 import CredentialBar from './CredentialsBar';
-import ProfFormBar from './ProfFormBar';
 import ProfPage from './ProfPage'
 import Welcome from './Welcome';
 import PageNotFound from './PageNotFound';
 import NewForm from './NewForm';
 import ExistingForm from './ExistingForm';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Preview from './Preview';
 
 ReactDOM.render(
