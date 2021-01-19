@@ -6997,3 +6997,5 @@ webapp/be/WebappApi/WebappApi/__pycache__/__init__.cpython-38.pyc
 webapp/be/WebappApi/WebappApi/__pycache__/settings.cpython-38.pyc
 webapp/be/WebappApi/WebappApi/__pycache__/urls.cpython-38.pyc
 webapp/be/WebappApi/WebappApi/__pycache__/wsgi.cpython-38.pyc
+webapp/fe/yarn.lock
+webapp/fe/yarn.lock
