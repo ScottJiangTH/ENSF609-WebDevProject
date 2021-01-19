@@ -16,12 +16,12 @@ var initialState = {
             projectWeight: 25,
             midtermWeight: 25,
             finalWeight: 25
-        }],
+        },],
 
         letterGrade: [{
             apLow: 95, aLow: 90, amLow: 85, bpLow: 80, bLow: 75, bmLow: 70, cpLow: 65, cLow: 60, cmLow: 56, dpLow: 53, dLow: 50, fLow: 0,
             apHigh: 100, aHigh: 95, amHigh: 90, bpHigh: 85, bHigh: 80, bmHigh: 75, cpHigh: 70, cHigh: 65, cmHigh: 60, dpHigh: 56, dHigh: 53, fHigh: 50
-        }]
+        },]
     }
 };
 
@@ -574,7 +574,7 @@ export default class FinalGrade extends React.Component {
                     </div>
                     <div class='column'>
                         <Link to={`/prof/preview/${this.props.match.params.courseNumber}`}>
-                            <button class='button is-link'>Generate PDF</button>
+                            <button class='button is-link' onClick={evt => this.handleSave(evt)} >Generate PDF</button>
                         </Link>
                     </div>
                     <div class='column'></div>

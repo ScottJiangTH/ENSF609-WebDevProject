@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // ga represents a list of GraduateAttributes that has an ID and a description
 const ga = [
@@ -36,14 +36,14 @@ const defaultOutcome = {
         gid: "A1",
         description: "A knowledge base for engineering",
         instructionLevel: "Applied",
-    }]
+    },]
 };
 
 
 export default class LearningOutcome extends React.Component {
     constructor(props) {
         super(props);
-        
+
     }
 
     componentDidMount() {
@@ -51,7 +51,7 @@ export default class LearningOutcome extends React.Component {
         connect.getCourse(this.props.match.params.courseNumber).then((response) => {
             console.log(response);
             self.setState({ ...this.state, course: response });
-            initialState=this.state;
+            initialState = this.state;
         });
     }
 
@@ -61,12 +61,11 @@ export default class LearningOutcome extends React.Component {
         tempoutcome: {
             description: "",
             graduateAttributes:
-                [
-                    {
+                [{
                         gid: "A1",
                         description: "A knowledge base for engineering",
                         instructionLevel: "Applied",
-                    }]
+                    },]
 
         },
 
@@ -167,32 +166,33 @@ export default class LearningOutcome extends React.Component {
         }
 
     }
-    
+
     handleSave(event) {
         if (this.state === initialState) {
-          alert('No changes to be saved');
+            alert('No changes to be saved');
         } else {
-          connect.updateCourse(this.state.course);
-          initialState = this.state;
-          alert(this.state.course.courseName + ' saved. Please proceed to next section.');
+            connect.updateCourse(this.state.course);
+            initialState = this.state;
+            alert(this.state.course.courseName + ' saved. Please proceed to next section.');
         }
-      }
-      handleClear(event) {
+    }
+
+    handleClear(event) {
         var self = this;
         connect.getCourse(this.props.match.params.courseNumber).then((response) => {
-          console.log(response);
-          self.setState({ ...this.state, course: response });
+            console.log(response);
+            self.setState({ ...this.state, course: response });
         });
         alert('All fields cleared.');
-      }
-      updateCourseNum(event) {
+    }
+    updateCourseNum(event) {
         this.setState({
-          ...this.state, course: {
-            ...this.state.course,
-            courseNumber: event.target.value
-          }
+            ...this.state, course: {
+                ...this.state.course,
+                courseNumber: event.target.value
+            }
         });
-      }
+    }
     updateOutGA(event) {
         let desc = ga.find(({ gid }) => gid === event.target.value).description;
         this.setState({
@@ -270,7 +270,7 @@ export default class LearningOutcome extends React.Component {
 
     renderTable1Data() {
         return this.state.course.outcomes.map((outcome, index) => {
-            const { oid, description } = outcome //destructuring
+            const { description } = outcome //destructuring
             return (
                 <tr key={index}>
                     <td>{index + 1}</td>
@@ -783,11 +783,11 @@ export default class LearningOutcome extends React.Component {
                         <button class='button is-link' onClick={evt => this.handleSave(evt)} >Save Changes</button>
                     </div>
                     <div class='column'>
-                        <button class='button is-link'onClick={evt => this.handleClear(evt)} >Clear Content</button>
+                        <button class='button is-link' onClick={evt => this.handleClear(evt)} >Clear Content</button>
                     </div>
                     <div class='column'>
                         <Link to={`/prof/form/finalgrade/${this.props.match.params.courseNumber}`}>
-                            <button class='button is-link'>Proceed to Next Section</button>
+                            <button class='button is-link' onClick={evt => this.handleSave(evt)} >Proceed to Next Section</button>
                         </Link>
 
                     </div>

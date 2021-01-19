@@ -1,9 +1,36 @@
 import 'bulma/css/bulma.css';
 import React from 'react';
 import Connect from './Connect';
-import { Link } from 'react-router-dom';
+import ReactPDF, { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 const connect = new Connect();
+
+// Create styles
+const styles = StyleSheet.create({
+    page: {
+        flexDirection: 'row',
+        backgroundColor: '#E4E4E4'
+    },
+    section: {
+        margin: 10,
+        padding: 10,
+        flexGrow: 1
+    }
+});
+
+// Create Document Component
+const MyDocument = () => (
+    <Document>
+        <Page size="A4" style={styles.page}>
+            <View style={styles.section}>
+                <Text>Section #1</Text>
+            </View>
+            <View style={styles.section}>
+                <Text>Section #2</Text>
+            </View>
+        </Page>
+    </Document>
+);
 
 export default class Preview extends React.Component {
     constructor(props) {
@@ -103,141 +130,130 @@ export default class Preview extends React.Component {
 
     renderLetterGradeTable() {
         return (
-            <div>
-                {this.state.letterGrade.map(letter => {
-                    return (
-                        <table class="table is-bordered is-hoverable is-striped">
-                            <thead>
-                                <tr>
-                                    <th>Letter Grade</th>
-                                    <th>Total Mark (T)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>A+</td>
-                                    <td>T &#62;&#61; {letter.apHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>A</td>
-                                    <td> {letter.aLow} &#60;&#61; T &#60;&#61; {letter.aHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>A-</td>
-                                    <td> {letter.amLow} &#60;&#61; T &#60;&#61; {letter.amHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>B+</td>
-                                    <td> {letter.bpLow} &#60;&#61; T &#60;&#61; {letter.bpHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>B</td>
-                                    <td> {letter.bLow} &#60;&#61; T &#60;&#61; {letter.bHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>B-</td>
-                                    <td> {letter.bmLow} &#60;&#61; T &#60;&#61; {letter.bmHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>C+</td>
-                                    <td> {letter.cpLow} &#60;&#61; T &#60;&#61; {letter.cpHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>C</td>
-                                    <td> {letter.cLow} &#60;&#61; T &#60;&#61; {letter.cHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>C-</td>
-                                    <td> {letter.cmLow} &#60;&#61; T &#60;&#61; {letter.cmHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>D+</td>
-                                    <td> {letter.dpLow} &#60;&#61; T &#60;&#61; {letter.dpHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>D</td>
-                                    <td> {letter.dLow} &#60;&#61; T &#60;&#61; {letter.dHigh} </td>
-                                </tr>
-                                <tr>
-                                    <td>F</td>
-                                    <td> {letter.fLow} &#60;&#61; T &#60;&#61; {letter.fHigh} </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    )
-                })}
-            </div>
+
+            this.state.letterGrade.map(letter => {
+                return (
+                    <table class="table is-bordered is-hoverable is-striped">
+                        <thead>
+                            <tr>
+                                <th>Letter Grade</th>
+                                <th>Total Mark (T)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A+</td>
+                                <td>T &#62;&#61; {letter.apHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>A</td>
+                                <td> {letter.aLow} &#60;&#61; T &#60;&#61; {letter.aHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>A-</td>
+                                <td> {letter.amLow} &#60;&#61; T &#60;&#61; {letter.amHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>B+</td>
+                                <td> {letter.bpLow} &#60;&#61; T &#60;&#61; {letter.bpHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>B</td>
+                                <td> {letter.bLow} &#60;&#61; T &#60;&#61; {letter.bHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>B-</td>
+                                <td> {letter.bmLow} &#60;&#61; T &#60;&#61; {letter.bmHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>C+</td>
+                                <td> {letter.cpLow} &#60;&#61; T &#60;&#61; {letter.cpHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>C</td>
+                                <td> {letter.cLow} &#60;&#61; T &#60;&#61; {letter.cHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>C-</td>
+                                <td> {letter.cmLow} &#60;&#61; T &#60;&#61; {letter.cmHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>D+</td>
+                                <td> {letter.dpLow} &#60;&#61; T &#60;&#61; {letter.dpHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>D</td>
+                                <td> {letter.dLow} &#60;&#61; T &#60;&#61; {letter.dHigh} </td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td> {letter.fLow} &#60;&#61; T &#60;&#61; {letter.fHigh} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                )
+            })
         )
     }
 
     render() {
         return (
-            <div>
-                <section class="hero is-dark has-bg-img">
-                    <div class="hero-body">
-                        <div class='columns'>
-                            <div class='column'>
-                                <img is-bg-img alt="logo"
-                                    src="https://upload.wikimedia.org/wikipedia/en/3/3f/Schulich.png"></img>
+            <Document>
+                <Page style={styles.body}>
+                    <div>
+                        <section class="section m-6">
+                            <div class="control">
+                                <label class="label">1. Calendar Information</label>
+                                <div class="control has-background-black">
+                                    <label class="label has-text-white" >{this.state.courseNumber}</label>
+                                    <label class="label has-text-white" has-background-black>{this.state.courseName}</label>
+                                </div>
+                                <h2>{this.state.courseDescription}</h2>
+                                <div class="columns is-multiline">
+                                    <div class="column is-one-quarter">
+                                        <b>Course Hours: </b>
+                                    </div>
+                                    <div class="column is-three-quarters">
+                                        <b>{this.state.academicCredit} units; H ({this.state.lectureHours}-{this.state.labHours})</b>
+                                    </div>
+                                    <div class="column is-one-quarter">
+                                        <b>Academic Credit: </b>
+                                    </div>
+                                    <div class="column is-three-quarters">
+                                        <b>{this.state.academicCredit}</b>
+                                    </div>
+                                    <div class="column is-one-quarter">
+                                        <b>Calendar Reference: </b>
+                                    </div>
+                                    <div class="column is-three-quarters">
+                                        <a href={this.state.refUrl}>{this.state.refUrl}</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class='column has-text-right'>
-                                <h1 class="title is-1">Course Outline</h1>
+                        </section>
+                        <section class="section m-6">
+                            <label class="label">2. Learning Outcomes</label>
+                            <div class='table-container'>
+                                <body>At the end of this course, you will be able to:</body>
+                                {this.renderOutcomeTable()}
                             </div>
-                        </div>
+                        </section>
+                        <section class="section m-6">
+                            <label class="label">7. Final Grade Determination</label>
+                            <div class='table-container'>
+                                <body>The final grade in this course will be based on the following components:</body>
+                                {this.renderFinalGradeTable()}
+                            </div>
+                            <div class='table-container'>
+                                <body>Notes:</body>
+                                <body></body>
+                                <body>a) Conversion from a score out of 100 to a letter grade will be done using the conversion chart shown below. This grading scale can only be changed during the term if the grades will not be lowered.</body>
+                                {this.renderLetterGradeTable()}
+                            </div>
+                        </section>
                     </div>
-                </section>
-
-                <section class="section m-6">
-                    <div class="control">
-                        <label class="label">1. Calendar Information</label>
-                        <div class="control has-background-black">
-                            <label class="label has-text-white" >{this.state.courseNumber}</label>
-                            <label class="label has-text-white" has-background-black>{this.state.courseName}</label>
-                        </div>
-                        <h2>{this.state.courseDescription}</h2>
-                        <div class="columns is-multiline">
-                            <div class="column is-one-quarter">
-                                <b>Course Hours: </b>
-                            </div>
-                            <div class="column is-three-quarters">
-                                <b>{this.state.academicCredit} units; H ({this.state.lectureHours}-{this.state.labHours})</b>
-                            </div>
-                            <div class="column is-one-quarter">
-                                <b>Academic Credit: </b>
-                            </div>
-                            <div class="column is-three-quarters">
-                                <b>{this.state.academicCredit}</b>
-                            </div>
-                            <div class="column is-one-quarter">
-                                <b>Calendar Reference: </b>
-                            </div>
-                            <div class="column is-three-quarters">
-                                <a href={this.state.refUrl}>{this.state.refUrl}</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="section m-6">
-                    <label class="label">2. Learning Outcomes</label>
-                    <div class='table-container'>
-                        <body>At the end of this course, you will be able to:</body>
-                        {this.renderOutcomeTable()}
-                    </div>
-                </section>
-                <section class="section m-6">
-                    <label class="label">7. Final Grade Determination</label>
-                    <div class='table-container'>
-                        <body>The final grade in this course will be based on the following components:</body>
-                        {this.renderFinalGradeTable()}
-                    </div>
-                    <div class='table-container'>
-                        <body>Notes:</body>
-                        <body></body>
-                        <body>a) Conversion from a score out of 100 to a letter grade will be done using the conversion chart shown below. This grading scale can only be changed during the term if the grades will not be lowered.</body>
-                        {this.renderLetterGradeTable()}
-                    </div>
-                </section>
-            </div>
+                </Page>
+            </Document>
         );
     }
 }

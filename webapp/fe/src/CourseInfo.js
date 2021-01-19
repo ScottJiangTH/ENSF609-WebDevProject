@@ -1,8 +1,7 @@
 import 'bulma/css/bulma.css';
 import React from 'react'
 import Connect from './Connect';
-import { Link, Redirect } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 const options = [
   { label: "1", value: 1 }, { label: "2", value: 2 }, { label: "3", value: 3 },
@@ -216,7 +215,7 @@ export default class CourseInfo extends React.Component {
           </div>
           <div class='column'>
             <Link to={`/prof/form/learningoutcome/${this.state.course.courseNumber}`}>
-              <button class='button is-link'> Next Section </button>
+              <button class='button is-link' onClick={evt => this.handleSave(evt)} > Next Section </button>
             </Link>
           </div>
           <div class='column'></div>

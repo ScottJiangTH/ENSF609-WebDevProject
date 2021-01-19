@@ -35,7 +35,7 @@ export default class ExistingForm extends React.Component {
                     </td>
 
                     <td>
-                        <Link to={`/print/preview/${course.courseNumber}`}>
+                        <Link to={`/prof/preview/${course.courseNumber}`}>
                             <button class='button is-primary'>view pdf</button>
                         </Link>
                     </td>
