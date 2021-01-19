@@ -1,36 +1,11 @@
 import 'bulma/css/bulma.css';
 import React from 'react';
 import Connect from './Connect';
-import ReactPDF, { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import jsPDF from 'jspdf';
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 const connect = new Connect();
-
-// Create styles
-const styles = StyleSheet.create({
-    page: {
-        flexDirection: 'row',
-        backgroundColor: '#E4E4E4'
-    },
-    section: {
-        margin: 10,
-        padding: 10,
-        flexGrow: 1
-    }
-});
-
-// Create Document Component
-const MyDocument = () => (
-    <Document>
-        <Page size="A4" style={styles.page}>
-            <View style={styles.section}>
-                <Text>Section #1</Text>
-            </View>
-            <View style={styles.section}>
-                <Text>Section #2</Text>
-            </View>
-        </Page>
-    </Document>
-);
 
 export default class Preview extends React.Component {
     constructor(props) {
@@ -196,64 +171,78 @@ export default class Preview extends React.Component {
         )
     }
 
+    savePDF(evt) {
+        htmlToImage.toPng(document.getElementById('divToPrint'), { quality: 0.95 })
+        .then(function (dataUrl) {
+          var link = document.createElement('a');
+          link.download = 'my-image-name.jpeg';
+          const pdf = new jsPDF();
+          const imgProps= pdf.getImageProperties(dataUrl);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+          pdf.addImage(dataUrl, 'PNG', 0, 0,pdfWidth, pdfHeight);
+          pdf.save("preview.pdf"); 
+        });
+
+    }
+
     render() {
         return (
-            <Document>
-                <Page style={styles.body}>
-                    <div>
-                        <section class="section m-6">
-                            <div class="control">
-                                <label class="label">1. Calendar Information</label>
-                                <div class="control has-background-black">
-                                    <label class="label has-text-white" >{this.state.courseNumber}</label>
-                                    <label class="label has-text-white" has-background-black>{this.state.courseName}</label>
-                                </div>
-                                <h2>{this.state.courseDescription}</h2>
-                                <div class="columns is-multiline">
-                                    <div class="column is-one-quarter">
-                                        <b>Course Hours: </b>
-                                    </div>
-                                    <div class="column is-three-quarters">
-                                        <b>{this.state.academicCredit} units; H ({this.state.lectureHours}-{this.state.labHours})</b>
-                                    </div>
-                                    <div class="column is-one-quarter">
-                                        <b>Academic Credit: </b>
-                                    </div>
-                                    <div class="column is-three-quarters">
-                                        <b>{this.state.academicCredit}</b>
-                                    </div>
-                                    <div class="column is-one-quarter">
-                                        <b>Calendar Reference: </b>
-                                    </div>
-                                    <div class="column is-three-quarters">
-                                        <a href={this.state.refUrl}>{this.state.refUrl}</a>
-                                    </div>
-                                </div>
+            <div id='divToPrint'>
+                <section class="section m-6">
+                    <div class="control">
+                        <label class="label">1. Calendar Information</label>
+                        <div class="control has-background-black">
+                            <label class="label has-text-white" >{this.state.courseNumber}</label>
+                            <label class="label has-text-white" has-background-black>{this.state.courseName}</label>
+                        </div>
+                        <h2>{this.state.courseDescription}</h2>
+                        <div class="columns is-multiline">
+                            <div class="column is-one-quarter">
+                                <b>Course Hours: </b>
                             </div>
-                        </section>
-                        <section class="section m-6">
-                            <label class="label">2. Learning Outcomes</label>
-                            <div class='table-container'>
-                                <body>At the end of this course, you will be able to:</body>
-                                {this.renderOutcomeTable()}
+                            <div class="column is-three-quarters">
+                                <b>{this.state.academicCredit} units; H ({this.state.lectureHours}-{this.state.labHours})</b>
                             </div>
-                        </section>
-                        <section class="section m-6">
-                            <label class="label">7. Final Grade Determination</label>
-                            <div class='table-container'>
-                                <body>The final grade in this course will be based on the following components:</body>
-                                {this.renderFinalGradeTable()}
+                            <div class="column is-one-quarter">
+                                <b>Academic Credit: </b>
                             </div>
-                            <div class='table-container'>
-                                <body>Notes:</body>
-                                <body></body>
-                                <body>a) Conversion from a score out of 100 to a letter grade will be done using the conversion chart shown below. This grading scale can only be changed during the term if the grades will not be lowered.</body>
-                                {this.renderLetterGradeTable()}
+                            <div class="column is-three-quarters">
+                                <b>{this.state.academicCredit}</b>
                             </div>
-                        </section>
+                            <div class="column is-one-quarter">
+                                <b>Calendar Reference: </b>
+                            </div>
+                            <div class="column is-three-quarters">
+                                <a href={this.state.refUrl}>{this.state.refUrl}</a>
+                            </div>
+                        </div>
                     </div>
-                </Page>
-            </Document>
+                </section>
+                <section class="section m-6">
+                    <label class="label">2. Learning Outcomes</label>
+                    <div class='table-container'>
+                        <body>At the end of this course, you will be able to:</body>
+                        {this.renderOutcomeTable()}
+                    </div>
+                </section>
+                <section class="section m-6">
+                    <label class="label">7. Final Grade Determination</label>
+                    <div class='table-container'>
+                        <body>The final grade in this course will be based on the following components:</body>
+                        {this.renderFinalGradeTable()}
+                    </div>
+                    <div class='table-container'>
+                        <body>Notes:</body>
+                        <body></body>
+                        <body>a) Conversion from a score out of 100 to a letter grade will be done using the conversion chart shown below. This grading scale can only be changed during the term if the grades will not be lowered.</body>
+                        {this.renderLetterGradeTable()}
+                    </div>
+                </section>
+                <section class="section m-6">
+                    <button class="button is-link is-centered" onClick={evt => this.savePDF(evt)}>Save PDF</button>
+                </section>
+            </div>
         );
     }
 }
