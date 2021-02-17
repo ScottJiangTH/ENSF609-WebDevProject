@@ -1,4 +1,4 @@
-# ENSF609-WebDevProject
+# WebForm_React_Django_Project
 This is the repository of ENSF 607 + 609 + 610 cross-course web-development project.  
 Group Member: (Tommy) Peiyun Zhao, (Scott) Tianhan Jiang, Sonia Islam
 
